@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.navbar-brand {
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown {
+  position: relative;
+  padding-right: 10px;
+}
+
+.dropdown-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+}
+
+.dropdown-btn:hover {
+  color: #000;
+}
+
+.arrow-down {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 150px;
+}
+
+.dropdown-content a {
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.divider {
+  height: 1px;
+  background-color: #ccc;
+  margin: 0 10px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Center the search input and button */
+.nav-right {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  align-items: center;
+}
+
+.search-input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: 375px;
+}
+
+.search-btn {
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #218838;
+}
+
+.filter-img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px; 
+}
+
+.cart-icon {
+  font-size: 20px;
+  color: #333;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.cart-icon:hover {
+  color: #28a745;
+}
+
+.cart-img {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
