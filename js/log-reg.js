@@ -66,8 +66,7 @@ registrationForm.addEventListener('submit', async function (event) {
         if (response.ok) {
             alert(data.message);
             registrationForm.reset();
-            // setTimeout(() => window.location.href = "login.html", 300);
-            document.getElementById("reg-log").checked = false;
+            setTimeout(() => document.getElementById("reg-log").checked = false, 300);
         } else {
             registerErrorMessage.textContent = data.message || 'Registration failed.';
         }
