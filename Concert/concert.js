@@ -39,19 +39,34 @@ const sectionsData = [
         ]
     },
     {
-        title: 'Football',
+        title: 'Train',
         items: [
             { name: 'Headset', img_path: '../images/headset.jpg' },
             { name: 'Keyboard', img_path: '../images/keyboard.jpg' }
         ]
     },
     {
-        title: 'Planned Trips',
+        title: 'Train',
+        items: [
+            { name: 'Headset', img_path: '../images/headset.jpg' },
+            { name: 'Keyboard', img_path: '../images/keyboard.jpg' }
+        ]
+    },
+    {
+        title: 'Train',
+        items: [
+            { name: 'Headset', img_path: '../images/headset.jpg' },
+            { name: 'Keyboard', img_path: '../images/keyboard.jpg' }
+        ]
+    },
+    {
+        title: 'Train',
         items: [
             { name: 'Headset', img_path: '../images/headset.jpg' },
             { name: 'Keyboard', img_path: '../images/keyboard.jpg' }
         ]
     }
+   
 ];
 
 // Render circles independently
@@ -93,7 +108,7 @@ const sections_Categories = document.getElementById('section-Categories');
 function renderCircles() {
     section_Categories.innerHTML = circlesData.map(circle => `
         <div class="section-Category">
-            <a href="Concert/${circle.title}.html">
+            <a href="${circle.title}.html">
                 <div class="circle" style="background-image: url(${circle.image});">
                     <div class="overlay">
                         <h5>${circle.title}</h5>
