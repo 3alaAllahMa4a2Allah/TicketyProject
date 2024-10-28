@@ -9,10 +9,13 @@ body {
 }
 
 .navbar {
-  width: 100%;
+  width: 95%;
+  margin: auto;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 10px 20px;
   background-color: #f8f9fa;
   border-bottom: 1px solid #e0e0e0;
@@ -78,12 +81,16 @@ body {
   display: block;
 }
 
-/* Center the search input and button */
-.nav-right {
+.nav-center {
   flex-grow: 1;
   display: flex;
-  justify-content: center; /* Center content horizontally */
+  justify-content: center;
   align-items: center;
+}
+
+.nav-left { 
+  top: 10px;
+  right: 20px;
 }
 
 .search-input {
@@ -126,9 +133,6 @@ body {
 }
 
 .cart-img {
-  position: absolute;
-  top: 10px;
-  right: 20px;
   width: 20px;
   height: 20px;
   margin-right: 5px;
