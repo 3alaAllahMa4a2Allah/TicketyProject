@@ -93,7 +93,7 @@ const sections_Categories = document.getElementById('section-Categories');
 function renderCircles() {
     section_Categories.innerHTML = circlesData.map(circle => `
         <div class="section-Category">
-            <a href="Concert/${circle.title}.html">
+            <a href="/${(circle.title).toLowerCase()}">
                 <div class="circle" style="background-image: url(${circle.image});">
                     <div class="overlay">
                         <h5>${circle.title}</h5>
@@ -125,3 +125,47 @@ function renderSections() {
 // Call the render functions separately
 renderCircles();
 renderSections();
+
+// Add event listener for navigation links
+document.addEventListener('DOMContentLoaded', () => {
+    const loginButton = document.querySelector('.logo-none');
+    const usernameDisplay = document.getElementById('username-display');
+    const userDropdown = document.getElementById('user-dropdown');
+    const userName = document.getElementById('user-name');
+
+    // Dropdown content with Profile and Logout links
+    userDropdown.innerHTML = `
+        <a href="/profile">Profile</a>
+        <a href="" id="logout">Logout</a>
+    `;
+
+    // Check if user is logged in
+    const username = localStorage.getItem('username');
+    if (username) {
+        loginButton.style.display = 'none';
+        usernameDisplay.style.display = 'flex';
+        userName.textContent = username;
+
+        // Toggle dropdown visibility on username display click
+        usernameDisplay.addEventListener('click', (event) => {
+            event.stopPropagation();
+            userDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (event) => {
+            if (!userDropdown.contains(event.target) && event.target !== usernameDisplay) {
+                userDropdown.classList.remove('show');
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.reload();
+        });
+    } else {
+        loginButton.style.display = 'block';
+        usernameDisplay.style.display = 'none';
+    }
+});

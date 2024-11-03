@@ -26,7 +26,15 @@ loginForm.addEventListener('submit', async function (event) {
         const data = await response.json();
         if (response.ok) {
             alert('Login successful!');
-            setTimeout(() => window.location.href = "index.html", 300);
+            // Store user ID and username in local storage
+            localStorage.setItem('userId', data.userId); // Capture user ID from server response
+            localStorage.setItem('username', data.username); // Store username
+
+            // Correctly store the token from server response
+            localStorage.setItem('token', data.token); // Use token from the response
+
+            // Redirect after a short delay
+            setTimeout(() => window.location.href = "/", 300);
         } else {
             loginErrorMessage.textContent = data.message || 'Login failed.';
         }
@@ -35,6 +43,8 @@ loginForm.addEventListener('submit', async function (event) {
         loginErrorMessage.textContent = 'An error occurred. Please try again later.';
     }
 });
+
+
 
 // Registration Script
 const registrationForm = document.getElementById('registrationForm');
