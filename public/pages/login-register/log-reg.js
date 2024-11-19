@@ -1,3 +1,14 @@
+const cardSwitch = document.getElementById('reg-log');
+
+cardSwitch.checked = window.location.href.includes('/register');
+
+cardSwitch.addEventListener('change', () => {
+    setTimeout(() => {
+        window.location.href = cardSwitch.checked ? '/register' : '/login';
+    }, 500);
+});
+
+
 // Login Script
 const loginForm = document.getElementById('loginForm');
 const loginErrorMessage = document.getElementById('login-error-message');
@@ -17,7 +28,7 @@ loginForm.addEventListener('submit', async function (event) {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://localhost:3000/users/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
@@ -45,7 +56,6 @@ loginForm.addEventListener('submit', async function (event) {
 });
 
 
-
 // Registration Script
 const registrationForm = document.getElementById('registrationForm');
 const registerErrorMessage = document.getElementById('register-error-message');
@@ -66,7 +76,7 @@ registrationForm.addEventListener('submit', async function (event) {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/register', {
+        const response = await fetch('http://localhost:3000/users/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password }),

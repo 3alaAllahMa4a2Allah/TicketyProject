@@ -1,14 +1,14 @@
 {
   "name": "ticketyprojectfiles",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "run.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/run.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["ticketing", "express", "nodejs"],  
+  "author": "Teckety", 
   "license": "ISC",
-  "description": "",
+  "description": "A ticketing system project using Express and MongoDB",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",

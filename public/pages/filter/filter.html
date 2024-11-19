@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket Marketplace</title>
+    <link rel="stylesheet" href="pages/filter/stylefilter.css">
+    <link rel="stylesheet" href="pages/filter/filter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Sidebar for Filters -->
+        <aside class="filter-sidebar">
+            <div class="breadcrumb">
+                <a href="/">Home</a> &rarr; <span id="namePage">Filter</span>
+            </div>
+            <h2>Filters</h2>
+            <div class="filter-section">
+                <div class="filter-header">
+                    <span>Filter</span>
+                    <button class="clear-button">Clear</button>
+                </div>
+
+                <!-- Price Filter -->
+                <div class="filter-category">
+                    <div class="filter-title">PRICE</div>
+                    <div id="priceSlider"></div>
+                    <div class="price-values">
+                        <span id="minPriceValue">EGP 0</span>
+                        <span id="maxPriceValue">EGP 30000</span>
+                    </div>
+                    <div class="manual-inputs">
+                        <input type="text" id="minPriceInput" placeholder="Min Price" />
+                        <input type="text" id="maxPriceInput" placeholder="Max Price" />
+                    </div>
+                </div>
+
+                <!-- Location Filter -->
+                <div class="filter-section">
+                    <div class="filter-header">
+                        <span class="filter-title">Location</span>
+                    </div>
+                    <select id="locationDropdown">
+                        <option value="">Select Location</option>
+                    </select>
+                </div>
+                 <!-- Ticket Type Filter -->
+                <div class="filter-section">
+                 <div class="filter-header">
+                    <span class="filter-title">Ticket Type</span>
+                    </div>
+                    <select id="ticketTypeDropdown">
+                     <option value="">Select Ticket Type</option>
+                    </select>
+                 </div>
+
+                <!-- Availability Filter -->
+                <div class="filter-category">
+                    <div class="filter-title">AVAILABILITY</div>
+                    <label><input type="checkbox" id="inStockCheckbox" > In Stock</label>
+                    <label><input type="checkbox" id="outOfStockCheckbox"> Out of Stock</label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area for Tickets -->
+        <main class="ticket-container" id="ticket-container">
+            <h1 id="namePage_2">Ticket Marketplace</h1>
+            <div class="tickets-wrapper">
+                <!-- Tickets will be dynamically inserted here -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Link to the JavaScript files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.3/nouislider.min.js"></script>
+    <script src="pages/filter/filter.js"></script> <!-- Keep the filter.js for filtering functionality -->
+</body>
+</html>

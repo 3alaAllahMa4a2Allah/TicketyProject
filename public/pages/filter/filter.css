@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.filter-sidebar {
+    position: fixed;
+    top: 30px; /* Space from the top */
+    bottom: 30px; /* Space from the bottom */
+    left: 30px; /* Distance from the left */
+    width: 300px; /* Fixed width for the sidebar */
+    padding: 20px;
+    overflow-y: auto; /* Scroll if content overflows */
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    z-index: 10; /* Ensures it's above other content */
+}
+
+/* Adjust the main-container to accommodate the fixed sidebar */
+.main-container {
+    display: flex;
+    padding-left: 360px; /* Offset for the fixed sidebar width + some space */
+}
+
+.breadcrumb {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.breadcrumb a {
+    color: #666;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.filter-section {
+    margin-top: 10px;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.clear-button {
+    background-color: #ff3b3b;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filter-category {
+    margin-bottom: 20px;
+}
+
+.filter-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px;
+}
+
+/* Styling for noUiSlider */
+#priceSlider {
+    margin-top: 10px;
+}
+
+.noUi-target {
+    height: 8px;
+    background: #ddd;
+    border-radius: 4px;
+}
+
+.noUi-handle {
+    background: #ff3b3b;
+    border: 2px solid #fff;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.noUi-handle:hover {
+    background: #ff5959;
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #333;
+    margin-top: 10px;
+}
+
+label {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #333;
+}
+
+input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.manual-inputs {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+input[type="text"] {
+    width: 45%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-top: 5px;
+}
