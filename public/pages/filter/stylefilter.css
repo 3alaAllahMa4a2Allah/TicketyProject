@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.main-container {
+    display: flex; /* Use flexbox for layout */
+    margin: 30px; /* Space around the main container */
+    flex: 1; /* Allow it to take full width */
+}
+
+.filter-sidebar {
+    width: 300px; /* Width of the sidebar */
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    position: fixed; /* Fix the sidebar in place */
+    top: 30px; /* 30 pixels from the top */
+    bottom: 30px; /* 30 pixels from the bottom */
+}
+
+.ticket-container {
+    margin-left: 320px; /* Leave space for the fixed sidebar */
+    width: calc(100% - 320px); /* Adjusted for fixed sidebar */
+    padding: 20px;
+  
+}
+
+
+.alignment-marker {
+    height: 0; /* Invisible height */
+    margin-bottom: 20px; /* Space between the marker and tickets */
+}
+
+.tickets-wrapper {
+    display: flex; /* Enable flexbox */
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    gap: 20px; /* Add spacing between tickets */
+    justify-content: flex-start; /* Align items to the start */
+    margin-left: -260px; /* Adjust this negative margin to move the tickets left */
+}  
+
+.ticket {
+    background-color: #f9f9f9; /* Ticket background color */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 8px; /* Rounded corners */
+    padding: 9px; /* Padding inside ticket */
+    width: calc(33.33% - 20px); /* Three items per row with gap adjustment */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    transition: transform 0.3s; /* Animation for hover effect */
+    height: 400px;
+}
+
+h1 {
+    font-size: 28px;
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+    font-weight: bold;
+    margin-left: -1000px; /* Adjusted for left alignment */
+}
+
+.ticket img {
+    width: 100%; /* Responsive image */
+    height: 50%;
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
+}
+
+.ticket h3 {
+    padding: 10px;
+    font-size: 1.2em;
+}
+
+.ticket:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+}
+
+@media (max-width: 768px) {
+    .ticket {
+        width: calc(50% - 20px); /* Two items per row on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .ticket {
+        width: 100%; /* One item per row on small screens */
+    }
+}

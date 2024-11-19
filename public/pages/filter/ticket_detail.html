@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" class="ticket-detail-page">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Ticket Details</title>
+      <link rel="stylesheet" href="pages/filter/ticket_detail.css"> <!-- External CSS file -->
+      <link rel="stylesheet" href="pages/filter/seat.css">
+  </head>
+  <body>
+      <div class="ticket-detail-container">
+          <h1>Ticket Details</h1>
+          <div id="ticket-detail" class="ticket-detail-wrapper">
+              <!-- Ticket details will be dynamically inserted here -->
+          </div>
+          <a href="/" class="back-button">Back to Marketplace</a>
+      </div>
+      
+      <section>
+          <div class="movie-container">
+              <label> Select a type:</label>
+              <select id="movie">
+                <option value="220" data-value="stander">Stander</option>
+                <option value="300" data-value="max">Max</option>
+                <option value="350" data-value="imax">IMax</option>
+                <option value="460" data-value="gold">Gold</option>
+              </select>
+            </div>
+        
+            <ul class="showcase">
+              <li>
+                <div class="seat"></div>
+                <small>Available</small>
+              </li>
+              <li>
+                <div class="seat selected"></div>
+                <small>Selected</small>
+              </li>
+              <li>
+                <div class="seat sold"></div>
+                <small>Sold</small>
+              </li>
+            </ul>
+            <div class="container">
+              <div class="screen"></div>
+              
+              <div class="row">
+                <div class="seat" data-seat-number="A1"></div>
+                <div class="seat" data-seat-number="A2"></div>
+                <div class="seat" data-seat-number="A3"></div>
+                <div class="seat" data-seat-number="A4"></div>
+                <div class="seat" data-seat-number="A5"></div>
+                <div class="seat" data-seat-number="A6"></div>
+                <div class="seat" data-seat-number="A7"></div>
+                <div class="seat" data-seat-number="A8"></div>
+              </div>
+        
+              <div class="row">
+                <div class="seat" data-seat-number="B1"></div>
+                <div class="seat" data-seat-number="B2"></div>
+                <div class="seat" data-seat-number="B3"></div>
+                <div class="seat" data-seat-number="B4"></div>
+                <div class="seat" data-seat-number="B5"></div>
+                <div class="seat" data-seat-number="B6"></div>
+                <div class="seat" data-seat-number="B7"></div>
+                <div class="seat" data-seat-number="B8"></div>
+              </div>
+              <div class="row">
+                <div class="seat" data-seat-number="C1"></div>
+                <div class="seat" data-seat-number="C2"></div>
+                <div class="seat" data-seat-number="C3"></div>
+                <div class="seat" data-seat-number="C4"></div>
+                <div class="seat" data-seat-number="C5"></div>
+                <div class="seat" data-seat-number="C6"></div>
+                <div class="seat" data-seat-number="C7"></div>
+                <div class="seat" data-seat-number="C8"></div>
+              </div>
+              <div class="row">
+                <div class="seat" data-seat-number="D1"></div>
+                <div class="seat" data-seat-number="D2"></div>
+                <div class="seat" data-seat-number="D3"></div>
+                <div class="seat" data-seat-number="D4"></div>
+                <div class="seat" data-seat-number="D5"></div>
+                <div class="seat" data-seat-number="D6"></div>
+                <div class="seat" data-seat-number="D7"></div>
+                <div class="seat" data-seat-number="D8"></div>
+              </div>
+              <div class="row">
+                <div class="seat" data-seat-number="E1"></div>
+                <div class="seat" data-seat-number="E2"></div>
+                <div class="seat" data-seat-number="E3"></div>
+                <div class="seat" data-seat-number="E4"></div>
+                <div class="seat" data-seat-number="E5"></div>
+                <div class="seat" data-seat-number="E6"></div>
+                <div class="seat" data-seat-number="E7"></div>
+                <div class="seat" data-seat-number="E8"></div>
+              </div>
+              <div class="row">
+                <div class="seat" data-seat-number="F1"></div>
+                <div class="seat" data-seat-number="F2"></div>
+                <div class="seat" data-seat-number="F3"></div>
+                <div class="seat" data-seat-number="F4"></div>
+                <div class="seat" data-seat-number="F5"></div>
+                <div class="seat" data-seat-number="F6"></div>
+                <div class="seat" data-seat-number="F7"></div>
+                <div class="seat" data-seat-number="F8"></div>
+              </div>
+            </div>
+        
+            <p class="text">
+              You have selected <span id="count">0</span> seat for a price of RS.<span
+                id="total"
+                >0</span
+              >
+            </p>
+            <button id="book-button">Book</button>
+      </section>
+
+      <script src="pages/filter/seat.js"></script>
+  </body>
+</html>
