@@ -16,8 +16,8 @@ const loginErrorMessage = document.getElementById('login-error-message');
 loginForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 
-    const email = document.getElementById('logemail').value; // Updated ID
-    const password = document.getElementById('logpass').value; // Updated ID
+    const email = document.getElementById('logemail').value;
+    const password = document.getElementById('logpass').value;
 
     if (!email || !password) {
         loginErrorMessage.textContent = 'Please fill in all fields.';
@@ -28,7 +28,7 @@ loginForm.addEventListener('submit', async function (event) {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/users/login', {
+        const response = await fetch('users/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
@@ -76,7 +76,7 @@ registrationForm.addEventListener('submit', async function (event) {
     }
 
     try {
-        const response = await fetch('http://localhost:3000/users/register', {
+        const response = await fetch('users/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password }),
