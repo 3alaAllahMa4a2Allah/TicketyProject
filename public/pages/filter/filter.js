@@ -128,7 +128,7 @@ document.querySelector('.clear-button').addEventListener('click', () => {
 
 async function fetchTickets() {
     try {
-        const response = await fetch('http://localhost:3000/tickets/');
+        const response = await fetch('tickets/');
         allTickets = await response.json();
 
         uniqueLocations = [...new Set(allTickets.map(ticket => ticket.location))];

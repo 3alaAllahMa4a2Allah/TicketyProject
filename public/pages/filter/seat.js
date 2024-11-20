@@ -6,7 +6,7 @@ let selected = [];
 
 async function fetchTicketDetails(ticketId) {
   try {
-    const response = await fetch(`http://localhost:3000/tickets/${ticketId}`);
+    const response = await fetch(`tickets/${ticketId}`);
     const ticket = await response.json();
 
     const ticketDetailWrapper = document.querySelector('#ticket-detail');
@@ -64,7 +64,7 @@ document.getElementById('book-button').addEventListener('click', () => {
   }
 
   // Send the selected seat data to the server
-  fetch('http://localhost:3000/tickets/save-seat', {
+  fetch('tickets/save-seat', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ async function refresh(){
       await fetchTicketDetails(ticketId);
 
       // Fetch the seats for the given ticket
-      const response = await fetch(`http://localhost:3000/tickets/seats/${ticketId}`);
+      const response = await fetch(`tickets/seats/${ticketId}`);
       const data = await response.json();
 
       // Determine seat data category based on selected movie type
