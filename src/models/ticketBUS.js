@@ -7,14 +7,12 @@ const ticketSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     img: { type: String, required: true },
     amount: { type: Number, required: true, default: 0 },
-    location: { type: String, required: true },
-    ticketType: { type: String, required: true },
-    seats_stander: { type: Array, required: true },
-    seats_max: { type: Array, required: true },
-    seats_imax: { type: Array, required: true },
-    seats_gold: { type: Array, required: true },
-    date: { type: Date, required: true }  // Added date field
-}, { collection: 'Tickets' });
+    startLocation: { type: String, required: true },  
+    destination: { type: String, required: true },  
+    date: { type: Date, required: true },        
+    ticketType: { type: String, required: true },     
+    date: { type: Date, required: true },             
+}, { collection: 'TicketsBus' });
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
 

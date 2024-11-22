@@ -4,43 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
-    
     <link rel="stylesheet" href="pages/profile/profile.css">
 </head>
 <body>
-    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-        <div class="row">
-            <div class="col-md-6"><label>User Id</label></div>
-            <div class="col-md-6"><p id="userId"></p></div>
+    <div class="emp-profile">
+        <div class="profile-head">
+            <h5 id="userName">User Name</h5>
+            <h6 id="userEmail">user@example.com</h6>
         </div>
-        <div class="row">
-            <div class="col-md-6"><label>Name</label></div>
-            <div class="col-md-6">
-                <p class="userName" id="userName"></p>
-                <input type="text" class="edit-input" id="editName" placeholder="Edit your name" style="display: none;">
-
-            </div>
+        <div class="profile-tab">
+            <input id="editName" class="edit-input" type="text" placeholder="Edit Name" />
+            <input id="editEmail" class="edit-input" type="email" placeholder="Edit Email" />
         </div>
-        <div class="row">
-            <div class="col-md-6"><label>Email</label></div>
-            <div class="col-md-6">
-                <p class="userEmail" id="userEmail"></p>
-                <input type="email" class="edit-input" id="editEmail" placeholder="Edit your email" style="display: none;">
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6"><label>Phone</label></div>
-            <div class="col-md-6"><p>123 456 7890</p></div>
-        </div>
-        <div class="row">
-            <div class="col-md-6"><label>Profession</label></div>
-            <div class="col-md-6"><p>Web Developer and Designer</p></div>
-        </div>
+        <button class="profile-edit-btn">Edit Profile</button>
     </div>
-    <!-- External JavaScript Files -->
+
+    </div>
     <script src="pages/profile/profile.js"></script>
 </body>
 </html>

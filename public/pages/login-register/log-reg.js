@@ -16,8 +16,8 @@ const loginErrorMessage = document.getElementById('login-error-message');
 loginForm.addEventListener('submit', async function (event) {
     event.preventDefault();
 
-    const email = document.getElementById('logemail').value;
-    const password = document.getElementById('logpass').value;
+    const email = document.getElementById('logemail').value; // Updated ID
+    const password = document.getElementById('logpass').value; // Updated ID
 
     if (!email || !password) {
         loginErrorMessage.textContent = 'Please fill in all fields.';

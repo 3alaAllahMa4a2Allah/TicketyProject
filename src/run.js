@@ -6,6 +6,7 @@ const cors = require('cors');
 const connectDB = require('./config/db'); 
 const ticketRoutes = require('./routes/ticketRoutes');
 const userRoutes = require('./routes/userRoutes');
+const searchRoutes = require('./routes/searchRoutes');
 
 const app = express();
 
@@ -13,12 +14,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 // Connect to MongoDB for Users
 connectDB(process.env.MONGO_URI, 'TicketyDB');
 
 // Routes
+app.use('/search', searchRoutes);
 app.use('/tickets', ticketRoutes);
 app.use('/users', userRoutes);
+
+
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '../public')));
@@ -31,8 +36,12 @@ app.get('/profile', (req, res) => {
     res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'profile', 'profile.html'));
 });
 
+app.get('/PurchasedTickets', (req, res) => {
+    res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'PurchasedTickets', 'PurchasedTickets.html'));
+});
+
 app.get('/ticket_detail', (req, res) => {
-    res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'filter', 'ticket_detail.html'));
+    res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'seat', 'ticket_detail.html'));
 });
 
 [

@@ -26,7 +26,6 @@ body {
     margin-left: 320px; /* Leave space for the fixed sidebar */
     width: calc(100% - 320px); /* Adjusted for fixed sidebar */
     padding: 20px;
-  
 }
 
 
@@ -43,35 +42,67 @@ body {
     margin-left: -260px; /* Adjust this negative margin to move the tickets left */
 }  
 
-.ticket {
-    background-color: #f9f9f9; /* Ticket background color */
-    border: 1px solid #ccc; /* Border style */
-    border-radius: 8px; /* Rounded corners */
-    padding: 9px; /* Padding inside ticket */
-    width: calc(33.33% - 20px); /* Three items per row with gap adjustment */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
-    transition: transform 0.3s; /* Animation for hover effect */
-    height: 400px;
-}
-
 h1 {
     font-size: 28px;
     text-align: center;
     margin-top: 20px;
     color: #333;
     font-weight: bold;
-    margin-left: -1000px; /* Adjusted for left alignment */
+    margin-left: -100%;
+}
+
+.ticket {
+    position: relative;
+    background-color: #f9f9f9; /* Ticket background color */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 8px; /* Rounded corners */
+    padding: 9px; /* Padding inside ticket */
+    width: calc(33.33% - 20px); /* Three items per row with gap adjustment */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+    transition: all 0.3s; /* Animation for hover effect */
+    height: 400px;
+    overflow: hidden; /* Prevent overlay spill */
 }
 
 .ticket img {
     width: 100%; /* Responsive image */
-    height: 50%;
-    border-radius: 8px 8px 0 0; /* Rounded top corners */
+    height: 100%;
+    border-radius: 8px; /* Rounded top corners */
+    object-fit: 100% 100%; /* Ensure image fills the container */
+    z-index: 1; /* Behind the overlay */
+}
+
+.ticket-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0); /* Initially transparent */
+    border-radius: 8px;
+    z-index: 2; /* Above the image */
+    transition: background-color 0.3s;
+}
+
+.ticket:hover .ticket-overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay on hover */
 }
 
 .ticket h3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white; /* Ensure text is visible */
     padding: 10px;
     font-size: 1.2em;
+    opacity: 0;
+    z-index: 3; /* Above the overlay */
+    transition: opacity 0.3s;
+}
+
+.ticket:hover h3 {
+    opacity: 1; /* Make text visible on hover */
 }
 
 .ticket:hover {
