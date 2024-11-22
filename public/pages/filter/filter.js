@@ -77,11 +77,9 @@ function filterTickets(minPrice, maxPrice) {
 
             ticketDiv.innerHTML = `
                 <a href="/ticket_detail?ticket=${ticket._id}">
+                    <div class="ticket-overlay"></div>
                     <img src="${ticket.img}" alt="${ticket.name} photo">
                     <h3>${ticket.name}</h3>
-                    <p>Description: ${ticket.description}</p>
-                    <p>Price: EGP ${ticket.price.toFixed(2)}</p>
-                    <p>Amount: ${ticket.amount} (${ticket.amount > 0 ? 'In Stock' : 'Out of Stock'})</p>
                 </a>
             `;
             ticketsWrapper.appendChild(ticketDiv);

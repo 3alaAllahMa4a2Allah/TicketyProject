@@ -1,1 +1,1 @@
-web: node src/run.js
+web: node js/server.js
