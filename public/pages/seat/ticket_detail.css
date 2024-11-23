@@ -84,3 +84,9 @@ h1 {
 .back-button:hover {
     background-color: #2e7d32;
 }
+
+
+.ticket-detail-container
+{
+    margin-top: 11%;
+}
