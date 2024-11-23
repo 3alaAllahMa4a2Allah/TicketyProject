@@ -79,9 +79,9 @@ function filterTickets(minPrice, maxPrice) {
             const truncatedDescription = ticket.description.length > 100 
                 ? ticket.description.substring(0, 100) + '...' 
                 : ticket.description;
-
+            const category = window.location.pathname.split('/').pop(); // Extract category from the URL
             ticketDiv.innerHTML = `
-                <a href="/ticket_detail?ticket=${ticket._id}">
+                <a href="/ticket_detail?category=${category}&ticket=${ticket._id}">
                     <div class="ticket-overlay"></div>
                     <img src="${ticket.img}" alt="${ticket.name} photo">
                     <h3>${ticket.name}</h3>
@@ -133,7 +133,8 @@ document.querySelector('.clear-button').addEventListener('click', () => {
 
 async function fetchTickets() {
     try {
-        const response = await fetch('tickets/');
+        const category = window.location.pathname.split('/').pop(); // Extract category from the URL
+        const response = await fetch(`/tickets/${category}`);
         allTickets = await response.json();
 
         uniqueLocations = [...new Set(allTickets.map(ticket => ticket.location))];

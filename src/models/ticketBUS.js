@@ -14,6 +14,6 @@ const ticketSchema = new mongoose.Schema({
     date: { type: Date, required: true },             
 }, { collection: 'TicketsBus' });
 
-const Ticket = mongoose.model('Ticket', ticketSchema);
+const TicketsBus = mongoose.model('TicketsBus', ticketSchema);
 
-module.exports = Ticket;
+module.exports = TicketsBus;
