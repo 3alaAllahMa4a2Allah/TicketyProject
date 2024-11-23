@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
 
 section {
   background-color: #242333;
@@ -9,6 +15,7 @@ section {
   justify-content: center;
   font-family: "Lato", sans-serif;
   margin: 0;
+  border-radius:20px;
 }
 
 .movie-container {

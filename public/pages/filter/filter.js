@@ -75,17 +75,24 @@ function filterTickets(minPrice, maxPrice) {
             const ticketDiv = document.createElement('div');
             ticketDiv.classList.add('ticket');
 
+            // Truncate description if it's too long
+            const truncatedDescription = ticket.description.length > 100 
+                ? ticket.description.substring(0, 100) + '...' 
+                : ticket.description;
+
             ticketDiv.innerHTML = `
                 <a href="/ticket_detail?ticket=${ticket._id}">
                     <div class="ticket-overlay"></div>
                     <img src="${ticket.img}" alt="${ticket.name} photo">
                     <h3>${ticket.name}</h3>
+                    <p>${ticket.description}</p>
                 </a>
             `;
             ticketsWrapper.appendChild(ticketDiv);
         });
     }
 }
+
 
 minPriceInput.addEventListener('keypress', function(event) {
     if (event.key === 'Enter') updateSliderFromInput();

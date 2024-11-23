@@ -5,24 +5,41 @@
     font-family: Arial, sans-serif;
 }
 
+body {
+    display: flex;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
 .filter-sidebar {
+    overflow-y: auto;
     position: fixed;
-    top: 30px; /* Space from the top */
-    bottom: 30px; /* Space from the bottom */
-    left: 30px; /* Distance from the left */
-    width: 300px; /* Fixed width for the sidebar */
+    top: 200px;
+    bottom: 30px;
+    left: 30px;
+    width: 300px;
     padding: 20px;
-    overflow-y: auto; /* Scroll if content overflows */
     background-color: #ffffff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    z-index: 10; /* Ensures it's above other content */
+    z-index: 10;
 }
 
-/* Adjust the main-container to accommodate the fixed sidebar */
+/* Hide scrollbar for filter-sidebar */
+.filter-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.filter-sidebar {
+    -ms-overflow-style: none; /* Hides scrollbar for IE and Edge */
+    scrollbar-width: none; /* Hides scrollbar for Firefox */
+}
+
 .main-container {
     display: flex;
-    padding-left: 360px; /* Offset for the fixed sidebar width + some space */
+    margin: 30px;
+    flex: 1;
+    padding-left: 360px; /* Offset for the fixed sidebar */
 }
 
 .breadcrumb {
@@ -33,14 +50,16 @@
 
 .breadcrumb a {
     color: #666;
-    text-decoration: none;
+    text-decoration: none; /* Remove underline from links */
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
-    margin-bottom: 20px;
+    text-align: center;
+    margin-top: 20px;
     color: #333;
+    margin-left: -100%; /* Adjust for alignment */
 }
 
 .filter-section {
@@ -76,7 +95,6 @@ h1 {
     margin-top: 15px;
 }
 
-/* Styling for noUiSlider */
 #priceSlider {
     margin-top: 10px;
 }
@@ -142,4 +160,97 @@ select {
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     margin-top: 5px;
+}
+
+.ticket-container {
+    margin-left: 320px; /* Leave space for the fixed sidebar */
+    width: calc(100% - 320px); /* Adjusted for fixed sidebar */
+    padding: 20px;
+}
+
+.alignment-marker {
+    height: 0;
+    margin-bottom: 20px;
+}
+
+.tickets-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    margin-left: -260px;
+}
+
+.ticket {
+    position: relative;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: calc(33.33% - 20px); /* Adjust the width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+    height: auto; /* Allow height to adjust based on content */
+    display: flex;
+    flex-direction: column; /* Stack the image, title, and description vertically */
+    justify-content: space-between;
+}
+
+.ticket img {
+    width: 100%; /* Ensure the image takes up the full width of the container */
+    height: auto; /* Allow the height to adjust based on the aspect ratio */
+    object-fit: contain; /* Ensure the image fits within the container without being cropped */
+    border-radius: 8px;
+   
+}
+
+
+.ticket .ticket-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ticket h3, .ticket p {
+    margin-left: 10px;
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #333;
+    text-decoration: none; /* Remove underline from title and description */
+}
+
+.ticket p {
+    font-size: 1em;
+    color: #666;
+   
+    line-height: 1.5;
+}
+
+.ticket a {
+   
+    text-decoration: none;
+}
+
+
+
+@media (max-width: 768px) {
+    .ticket {
+        width: calc(50% - 20px); /* Two items per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .ticket {
+        width: 100%; /* One item per row */
+    }
+}
+
+.body-filter {
+    position: absolute;
+    top: 130px;
+}
+#namePage_2
+{
+    margin-bottom: 30px;
 }

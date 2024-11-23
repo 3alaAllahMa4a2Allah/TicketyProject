@@ -50,7 +50,6 @@ height: 45px;
 margin-right: 10px;
 }
 
-
 .navbar-right a {
 color: #ffffff;
 margin-left: 15px;
@@ -80,11 +79,6 @@ font-size: 36px;
 
 .header-banner p {
 font-size: 18px;
-}
-
-.head1
-{
-  margin-top: 30px;
 }
 
 .sections {
@@ -205,6 +199,7 @@ margin-right: 10px;
 
 
 .HotOffersImg {
+  
   height:  460px; 
 }
 
@@ -251,6 +246,7 @@ a.btn.btn-primary {
   font-size: 17px;
   width: 90px;
   height: 40px;
+  margin: 20px 0;
   background-color: #e00c24; 
   border-color: #e00c24;
 }
@@ -336,34 +332,33 @@ a.btn.btn-primary:hover {
   font-weight: bold;
 }
 
-/* Style for the description text */
+
 .ticket-details p {
-  font-size: 14px; /* Adjust description font size */
+  font-size: 14px; 
   color: #555;
-  margin-top: 5px; /* Add some space between the name and description */
+  margin-top: 5px; 
 }
 
-/* Remove the default link styling (blue underline) */
+
 .search-result-link {
-  text-decoration: none; /* Remove underline */
-  color: inherit; /* Make sure link inherits color from its parent */
+  text-decoration: none;
+  color: inherit; 
 }
 
-/* Make sure links don't get blue outline or border when clicked */
 .search-result-linka:focus, a:active {
   outline: none;
   border: none;
 }
 
-/* Hover effect for links */
+
 .search-result-link:hover {
-  color: #007bff; /* Change color when hovering */
+  color: #007bff; 
 }
 
-/* Ensure no text decoration on the link inside the dropdown */
+
 .search-result-item a {
-  text-decoration: none; /* Remove underline from the entire result item link */
-  color: inherit; /* Make sure the color inherits from the parent */
+  text-decoration: none; 
+  color: inherit; 
 }
 
 .line
@@ -373,14 +368,7 @@ a.btn.btn-primary:hover {
   height:0.5px;
   background-color:#757a7cce;
 }
-.line3
-{
-  margin-top: 20px;
-  opacity: 50%;
-  width: 100%;
-  height:0.5px;
-  background-color:#757a7cce;
-}
+
 .line2
 {
   width: 100%;
@@ -393,12 +381,14 @@ a.btn.btn-primary:hover {
   position: relative;
   bottom:81px;
   left: 110px;
-  width: 220px; 
   background-color: #fff;
   border: 1px solid #ddd;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 0;
   overflow: hidden;
+  width: 220px; 
+  flex-shrink: 0;
+  
 }
 
 /* Menu list styling */
@@ -418,35 +408,33 @@ a.btn.btn-primary:hover {
   text-align: left;
   transition: background-color 0.3s ease, color 0.3s ease;
   color: #333; /* Default text color */
+  width: 220px; 
+  flex-shrink: 0;
 }
 
 .menu-item:last-child {
-  border-bottom: none; /* Remove border for the last item */
+  border-bottom: none; 
 }
 
-/* Styling for "All Categories" */
+
 .all-categories {
-  background-color: #df0b20; /* Distinct red background for "All Categories" */
-  color: #fff; /* White text for "All Categories" */
-  font-weight: bold; /* Highlighted font */
-  cursor: default; /* No pointer cursor for "All Categories" */
+  background-color: #df0b20;
+  color: #fff; 
+  font-weight: bold; 
+  cursor: default; 
 }
 
-/* Hover effect for all categories except "All Categories" */
 .menu-item:not(.all-categories):hover {
-  background-color: #007bff; /* Blue hover background */
+  background-color: #007bff; 
   color: #fff; /* White text on hover */
+  
 }
 
 .menu-carousel-container {
   display: flex; 
   width: 100%; 
   gap: 0;
-}
-
-.vertical-menu {
-  width: 220px; 
-  flex-shrink: 0;
+  
 }
 
 .carousel {
@@ -461,4 +449,12 @@ a.btn.btn-primary:hover {
 }
 
 
+
+.menu_a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: #000000;
+  text-decoration: none;
+}
 
