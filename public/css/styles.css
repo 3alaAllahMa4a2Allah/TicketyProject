@@ -6,7 +6,7 @@ padding: 0;
 
 #body {
 font-family: Arial, sans-serif;
-background-color:#ffffff;
+background-color:#f4f2f2;
 }
 
 .nav {
@@ -56,14 +56,32 @@ margin-left: 15px;
 text-decoration: none;
 }
 
-.Time
-{
-  position: relative;
-  top:7px;
-  margin-left: 220px;
-font-size: 12px;
-color: white;
+.line2 {
+    
+  width: 100%;
+  background-color: #000000;
+}
+.line2 div {
+  height: 36px;
+  padding: 0 20px;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
+.Time {
+  display: inline-block;
+  font-size: 12px;
+  color: white;
+}
+
+.contactUs {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 12px;
+  color: white;
 }
 
 .header-banner {
@@ -196,13 +214,6 @@ margin-right: 10px;
   font-size: 25px;                  
   color: #333;                     
 }
-
-
-.HotOffersImg {
-  
-  height:  460px; 
-}
-
 
 /* Username display styling */
 .username-display {
@@ -369,26 +380,45 @@ a.btn.btn-primary:hover {
   background-color:#757a7cce;
 }
 
-.line2
-{
-  width: 100%;
-  height:36px;
-  background-color:#000000;
+
+.menu-item:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
 }
+
+
+.menu-carousel-container {
+  display: flex; 
+  width: 95%; 
+  gap: 0;
+}
+
+.carousel {
+  flex-grow: 1; 
+  margin-left: 111px;
+  margin-top: -79px;
+}
+
+.HotOffersImg {
+  height: 460px;
+  object-fit: fill; 
+}
+
 
 /* Main vertical menu container */
 .vertical-menu {
   position: relative;
-  bottom:81px;
+  bottom: 81px;
   left: 110px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff; /* White background */
+  border: 1px solid #ddd; /* Light border for subtle separation */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Enhanced shadow for a more modern effect */
   padding: 0;
   overflow: hidden;
-  width: 220px; 
+  width: 240px; /* Slightly wider for a more balanced look */
   flex-shrink: 0;
-  
+  border-radius: 10px; /* Rounded corners for a modern feel */
+  transition: transform 0.3s ease-in-out; /* Smooth transition effect for hover */
 }
 
 /* Menu list styling */
@@ -400,61 +430,69 @@ a.btn.btn-primary:hover {
 
 /* General menu item styling */
 .menu-item {
-  height: 50px;
-  padding: 15px;
-  cursor: pointer;
-  border-bottom: 1px solid #ddd;
-  font-size: 16px;
-  text-align: left;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  color: #333; /* Default text color */
-  width: 220px; 
-  flex-shrink: 0;
-}
-
-.menu-item:last-child {
-  border-bottom: none; 
-}
-
-
-.all-categories {
-  background-color: #df0b20;
-  color: #fff; 
-  font-weight: bold; 
-  cursor: default; 
-}
-
-.menu-item:not(.all-categories):hover {
-  background-color: #007bff; 
-  color: #fff; /* White text on hover */
-  
-}
-
-.menu-carousel-container {
-  display: flex; 
-  width: 100%; 
-  gap: 0;
-  
-}
-
-.carousel {
-  flex-grow: 1; 
-  margin-left: 111px;
-  margin-top: -79px;
-}
-
-.HotOffersImg {
-  height: 460px;
-  object-fit: cover; 
-}
-
-
-
-.menu_a {
   display: block;
-  width: 100%;
-  height: 100%;
-  color: #000000;
+  height: 60px; /* Slightly taller for a more spacious feel */
+  line-height: 60px;
+  padding: 0 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd; /* Light bottom border */
+  font-size: 18px; /* Larger text for better readability */
+  text-align: left;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Adding scaling effect */
+  color: #333; /* Default text color */
   text-decoration: none;
+  font-weight: 500; /* Slightly bold for a clean look */
 }
+
+
+/* Style for "All Categories" item */
+.all-categories {
+  background-color: #006d7f; /* Greenish cyan background */
+  color: #fff; /* White text */
+  font-weight: bold;
+  cursor: default; /* Prevent hover and clicking */
+  border-radius: 10px 10px 0 0; /* Rounded corners on top */
+  transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+/* "All Categories" non-hoverable */
+.all-categories:hover {
+  background-color: #006d7f; /* Keep the same color on hover */
+}
+
+/* Active state for menu items */
+.menu-item.active {
+  background-color: #007bff; /* Blue background for active items */
+  color: #fff; /* White text */
+}
+
+/* Subtle hover effect for better interactivity */
+.menu-item:active {
+  background-color: #007bff; /* Maintain blue on active state */
+  transform: scale(1.05); /* Slight scale on click */
+}
+
+/* Modern hover effect on the vertical menu */
+.vertical-menu:hover {
+  transform: scale(1.02); /* Slightly enlarge the menu when hovered */
+}
+
+/* Add smooth transition to the menu items */
+.menu-item {
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Make menu more modern and dynamic */
+.menu-item:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Light shadow for depth */
+  background-color: #e0f7fa; /* Light cyan for hover effect */
+  color: #006d7f; /* Cyan color for text */
+  transform: scale(1.05); /* Scale effect for interactive feel */
+}
+
+/* Border and spacing for bottom item */
+.menu-item-last {
+  border-bottom: none;
+}
+
 

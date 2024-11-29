@@ -1,76 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" class="ticket-detail-page">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Ticket Details</title>
-      <link rel="stylesheet" href="pages/seat/ticket_detail.css"> <!-- External CSS file -->
-      <link rel="stylesheet" href="pages/seat/seat.css">
-      <link rel="stylesheet" href="\pages\filter\header.css">
-      
-  </head>
-
- 
-
-  <body>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Details</title>
+    <link rel="stylesheet" href="pages/seat/ticket_detail.css"> <!-- External CSS file -->
+    <link rel="stylesheet" href="pages/seat/seat.css">
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
     <header class="head1">
-      <div class="line2">
-          <p class="Time">SUN-THU 10 AM to 6 PM</p>
-      </div>
-  
-      <nav class="nav">
-          <div class="navCountent">
-              <div class="nav-left">
-                  <a href="/"> <img src="/images/Weblogo.png" class="logo" alt="logo"> </a>
-              </div>
-  
-              <div class="nav-center">
-                  <div class="search-container">
-                      <input 
-                          id="search-bar" 
-                          class="search-input" 
-                          type="text" 
-                          placeholder="Search tickets by name, description, or location..." 
-                          aria-label="Search tickets"
-                      />
-                      <div id="search-results" class="search-results"></div>
-                  </div>
-              </div>
-  
-              <div class="nav-right">
-                  <button class="cart-btn">
-                      <img src="\images\BoughtTickets.png" alt="Cart Icon" class="cart-img" id="PurchasedTickets">
-                  </button>
-                  <div id="username-display" class="username-display">
-                      <img id="user-img" src="https://i.ibb.co/Phmq0Lk/none-user.png" alt="user">
-                      <p id="user-name"></p>
-                  </div>
-                  <div class="dropdown-user" id="user-dropdown"></div>
-                  <a href="/login" class="btn btn-primary logo-none ButtonLogin" role="button"><samp class="spaam">Login</samp></a>
-              </div>
-          </div>
-      </nav>
-  </header>
-  
-      <div class="ticket-detail-container">
-          <h1>Ticket Details</h1>
-          <div id="ticket-detail" class="ticket-detail-wrapper">
-              <!-- Ticket details will be dynamically inserted here -->
-          </div>
+        <div class="line2">
+            <div>
+                <span class ="Time">SUN-THU 10 AM to 6 PM</span>
+                <a href="/contactUs" class="contactUs">Contact Us</a>
+            </div>
+        </div>
 
-          <br>
-          <br>
-          <br>
+        <nav class="nav">
+            <div class="navCountent">
+                <div class="nav-left">
+                    <a href="/"> <img src="/images/Weblogo.png" class="logo" alt="logo"> </a>
+                </div>
+    
+                <div class="nav-center">
+                    <div class="search-container">
+                        <input 
+                            id="search-bar" 
+                            class="search-input" 
+                            type="text" 
+                            placeholder="Search tickets by name, description, or location..." 
+                            aria-label="Search tickets"
+                        />
+                        <div id="search-results" class="search-results"></div>
+                    </div>
+                </div>
+    
+                <div class="nav-right">
+                    <button class="cart-btn">
+                        <img src="\images\BoughtTickets.png" alt="Cart Icon" class="cart-img" id="PurchasedTickets">
+                    </button>
+                    <div id="username-display" class="username-display">
+                        <img id="user-img" src="https://i.ibb.co/Phmq0Lk/none-user.png" alt="user">
+                        <p id="user-name"></p>
+                    </div>
+                    <div class="dropdown-user" id="user-dropdown"></div>
+                    <a href="/login" class="btn btn-primary logo-none ButtonLogin" role="button"><samp class="spaam">Login</samp></a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-      <section id="cinemaSeats"></section>
-      </div>
+    <div class="ticket-detail-container">
+        <h1>Ticket Details</h1>
+        <div id="ticket-detail" class="ticket-detail-wrapper">
+            <!-- Ticket details will be dynamically inserted here -->
+        </div>
 
-      <br>
-      <br>
-      
-      <script src="\js\script.js"> </script>  
-      <script src="pages/seat/seat.js"></script>
-      
-  </body>
+        <div id="booking-container" style="display: none;">
+            <label for="seat-class">Select Seat Class:</label>
+            <select id="seat-class">
+                <option value="First Class">First Class</option>
+                <option value="Second Class">Second Class</option>
+                <option value="Third Class">Third Class</option>
+            </select>
+            <button id="book-ticket-button">Book Ticket</button>
+        </div>
+
+        
+        
+        <br><br><br>
+
+        <section id="cinemaSeats"></section>
+
+    </div>
+
+    <br><br>
+  
+    <script src="\js\script.js"> </script>
+    <script src="pages/seat/seat.js"></script>
+  
+</body>
 </html>

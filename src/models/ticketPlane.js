@@ -1,4 +1,4 @@
-// src/models/ticket.js
+// src/models/ticketPlane.js
 const mongoose = require('mongoose');
 
 const ticketSchema = new mongoose.Schema({
@@ -9,11 +9,9 @@ const ticketSchema = new mongoose.Schema({
     amount: { type: Number, required: true, default: 0 },
     startLocation: { type: String, required: true },  
     destination: { type: String, required: true },  
-    date: { type: Date, required: true },        
-    ticketType: { type: String, required: true },     
-    date: { type: Date, required: true },             
+    date: { type: Date, required: true },                 
 }, { collection: 'TicketsPlane' });
 
-const Ticket = mongoose.model('Ticket', ticketSchema);
+const TicketsPlane = mongoose.model('TicketsPlane', ticketSchema);
 
-module.exports = Ticket;
+module.exports = TicketsPlane;

@@ -2,13 +2,15 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     display: flex;
     margin: 0;
-    background-color: #f4f4f4;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    color: #333;
 }
 
 .filter-sidebar {
@@ -17,13 +19,15 @@ body {
     top: 200px;
     bottom: 30px;
     left: 30px;
-    width: 300px;
-    padding: 20px;
+    width: 350px; /* Increased width for filter sidebar */
+    padding: 25px; /* Added more padding for better spacing */
     background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    border: 1px solid #2ac1ea; /* Updated border color to grey */
+    border-radius: 10px; /* Keep the rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 10;
 }
+
 
 /* Hide scrollbar for filter-sidebar */
 .filter-sidebar::-webkit-scrollbar {
@@ -39,31 +43,34 @@ body {
     display: flex;
     margin: 30px;
     flex: 1;
-    padding-left: 360px; /* Offset for the fixed sidebar */
+    padding-left: 380px; /* Adjusted for wider sidebar */
 }
 
 .breadcrumb {
     font-size: 14px;
-    color: #666;
+    color: #007bff;
     margin-bottom: 10px;
 }
 
 .breadcrumb a {
-    color: #666;
-    text-decoration: none; /* Remove underline from links */
+    color: #007bff;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
 }
 
 h1 {
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 26px;
+    font-weight: 600;
     text-align: center;
     margin-top: 20px;
     color: #333;
-    margin-left: -100%; /* Adjust for alignment */
 }
 
 .filter-section {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .filter-header {
@@ -72,16 +79,22 @@ h1 {
     align-items: center;
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 5px;
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .clear-button {
-    background-color: #ff3b3b;
+    background-color: #ff4d4d;
     color: #ffffff;
     border: none;
-    padding: 5px 10px;
+    padding: 8px 15px;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clear-button:hover {
+    background-color: #ff1a1a;
 }
 
 .filter-category {
@@ -96,17 +109,17 @@ h1 {
 }
 
 #priceSlider {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .noUi-target {
     height: 8px;
-    background: #ddd;
+    background: #e0e0e0;
     border-radius: 4px;
 }
 
 .noUi-handle {
-    background: #ff3b3b;
+    background: #007bff;
     border: 2px solid #fff;
     width: 12px;
     height: 12px;
@@ -116,7 +129,7 @@ h1 {
 }
 
 .noUi-handle:hover {
-    background: #ff5959;
+    background: #0056b3;
 }
 
 .price-values {
@@ -150,7 +163,7 @@ input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
-    background-color: #f9f9f9;
+    background-color: #f4f4f4;
     text-align: center;
 }
 
@@ -159,41 +172,103 @@ select {
     padding: 8px;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
-    margin-top: 5px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
 }
 
+/* Styles for hiding the Start Location and Destination dropdowns */
+.hide-start-destination #startLocationDropdown,
+.hide-start-destination #destinationDropdown,
+.hide-start-destination .filter-section:nth-child(4), /* Hide the entire section */
+.hide-start-destination .filter-section:nth-child(5) { /* Hide the entire section */
+    display: none !important; /* Ensure they are hidden */
+}
+
+
+
+/* Styles for the Date Filter (Title on top) */
+.date-filter {
+    display: flex;
+    flex-direction: column; /* Stack label above input */
+    margin-top: 20px;
+}
+
+.date-filter label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+.date-filter input[type="date"] {
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #f4f4f4;
+    width: 100%; /* Make inputs full width */
+}
+
+/* Adjust the category title to start at the same position as the tickets */
+#namePage_2 {
+    font-size: 20px; /* Smaller font size */
+    font-weight: bold;
+    color: #333;
+   
+    margin-top: 30px; 
+    margin-bottom: 20px; 
+    text-align: left; 
+}
+
+
+/* Ticket container adjustments */
 .ticket-container {
-    margin-left: 320px; /* Leave space for the fixed sidebar */
-    width: calc(100% - 320px); /* Adjusted for fixed sidebar */
+    width: 1020px;
     padding: 20px;
-}
-
-.alignment-marker {
-    height: 0;
-    margin-bottom: 20px;
+    text-decoration: none;
 }
 
 .tickets-wrapper {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: flex-start;
-    margin-left: -260px;
+    justify-content: flex-start;   
+    text-decoration: none; 
 }
 
+/* Default for most categories: 3 tickets per row */
 .ticket {
     position: relative;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
-    width: calc(33.33% - 20px); /* Adjust the width */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: calc(33.33% - 20px); /* 3 tickets per row */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s;
     height: auto; /* Allow height to adjust based on content */
     display: flex;
     flex-direction: column; /* Stack the image, title, and description vertically */
     justify-content: space-between;
+    text-decoration: none;
+    
+}
+
+/* Special handling for bus, train, and plane categories (1 ticket per row) */
+.ticket.bus, .ticket.train, .ticket.plane {
+    width: calc(50% - 20px); /* 2 tickets per row */
+    text-decoration: none;
+}
+
+.ticket.bus img, .ticket.train img, .ticket.plane img {
+    width: 100%; /* 1 ticket per row */
+    height: 180px;
+    object-fit: fill; /* Ensure the image is contained within its bounds */
+    text-decoration: none;
+}
+
+.ticket:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
 }
 
 .ticket img {
@@ -201,9 +276,7 @@ select {
     height: auto; /* Allow the height to adjust based on the aspect ratio */
     object-fit: contain; /* Ensure the image fits within the container without being cropped */
     border-radius: 8px;
-   
 }
-
 
 .ticket .ticket-content {
     flex: 1;
@@ -217,40 +290,39 @@ select {
     margin-top: 15px;
     font-size: 1.2em;
     color: #333;
-    text-decoration: none; /* Remove underline from title and description */
+    text-decoration: none;
 }
 
 .ticket p {
     font-size: 1em;
     color: #666;
-   
     line-height: 1.5;
-}
-
-.ticket a {
-   
     text-decoration: none;
 }
 
+.ticket a {
+    text-decoration: none;
+    color: #007bff;
+    text-decoration: none;
+}
 
+.ticket a:hover {
+    text-decoration: none;
+}
 
 @media (max-width: 768px) {
     .ticket {
-        width: calc(50% - 20px); /* Two items per row */
+        width: 100%; /* 1 ticket per row for bus/train/plane */
     }
 }
 
 @media (max-width: 480px) {
     .ticket {
-        width: 100%; /* One item per row */
+        width: 100%; /* 1 item per row for bus/train/plane */
     }
 }
 
 .body-filter {
     position: absolute;
     top: 130px;
-}
-#namePage_2
-{
-    margin-bottom: 30px;
 }

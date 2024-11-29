@@ -119,3 +119,121 @@ p.text span{
 section button {
   margin: 10px;
 }
+
+/* Style for the dropdown menu */
+#seat-class {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  width: 100%; /* Make the dropdown take full width */
+  max-width: 300px; /* Set a maximum width */
+  margin-top: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+/* Focus effect for the dropdown menu */
+#seat-class:focus {
+  outline: none;
+  border-color: #28a745; /* Green border when focused */
+}
+
+/* Container for the quantity buttons */
+#ticket-quantity-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Button style for the quantity buttons (+ and -) */
+.quantity-btn {
+  padding: 10px 15px;
+  font-size: 18px;
+  background-color: #007bff; /* Blue color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 10px;
+}
+
+/* Button hover effect */
+.quantity-btn:hover {
+  background-color: #0056b3; /* Darker blue */
+}
+
+/* Display for the quantity number */
+#ticket-quantity {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Disable the minus button if quantity is 1 */
+#decrease:disabled {
+  background-color: #cccccc; /* Gray color */
+  cursor: not-allowed;
+}
+
+/* Style for the "Book Ticket" button */
+#book-ticket-button {
+  padding: 10px 20px;
+  font-size: 16px; /* Slightly smaller font size */
+  background-color: #28a745; /* Green color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: auto; /* Button width adjusted to content */
+  margin-top: 20px;
+  display: inline-block; /* Adjusts to content */
+  text-align: center; /* Centers text in button */
+}
+
+/* Hover effect for the "Book Ticket" button */
+#book-ticket-button:hover {
+  background-color: #218838; /* Darker green */
+}
+
+/* Focus effect for the "Book Ticket" button */
+#book-ticket-button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+/* Style for the seat selection note */
+#seat-selection-note {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #fff3cd; /* Light yellow background for attention */
+  border: 1px solid #ffeeba; /* Soft border */
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #856404; /* Dark yellow text for professional feel */
+  font-family: Arial, sans-serif; /* Professional font */
+}
+
+/* Style for the warning icon */
+.warning-icon {
+  font-size: 20px;
+  color: #856404; /* Matching the text color */
+  margin-right: 10px;
+}
+
+/* Style for the note text */
+.note-text {
+  flex-grow: 1;
+  line-height: 1.5;
+}
+
+/* Make sure the "Book Ticket" button doesn't overlap the note */
+#book-ticket-button {
+  margin-top: 20px; /* Ensure space between button and note */
+}
+
+

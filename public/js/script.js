@@ -64,7 +64,7 @@ searchInput.addEventListener('input', async () => {
                 <a class="search-result-link" href="/ticket_detail?ticket=${ticket._id}">
                     <div class="search-result-item">
                         <div class="div-ticket-image">
-                            <img class="ticket-image" src="${ticket.img}" alt="${ticket.name} photo">
+                            <img class="ticket-image" src="${ticket.img}" alt="${ticket.name}">
                         </div>
                         <div class="ticket-details">
                             <strong>${ticket.name}</strong>

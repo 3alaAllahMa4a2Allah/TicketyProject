@@ -1,15 +1,29 @@
 const express = require('express');
 const router = express.Router();
-const Ticket = require('../models/ticket'); // Cinema tickets
-const TicketsBus = require('../models/ticketBUS'); // Bus tickets
-const User = require('../models/user'); // User model
+const User = require('../models/user'); 
+
+const TicketsCinema = require('../models/ticketCinema');    // Cinema ticket model
+const TicketsBus = require('../models/ticketBus');          // Bus ticket model
+const TicketsConcert = require('../models/ticketConcert');   // Concert ticket model
+const TicketsPlane = require('../models/ticketPlane');       // Plane ticket model
+const TicketsTrain = require('../models/ticketTrain');       // Train ticket model
+const TicketsFootball = require('../models/ticketFootball'); // Football ticket model
+
 
 // Function to determine the model based on the category
 const getModelByCategory = (category) => {
     if (category === 'cinema') {
-        return Ticket;
+        return TicketsCinema;
     } else if (category === 'bus') {
         return TicketsBus;
+    } else if (category === 'concert') {
+        return TicketsConcert;
+    } else if (category === 'plane') {
+        return TicketsPlane;
+    } else if (category === 'train') {
+        return TicketsTrain;
+    } else if (category === 'football') {
+        return TicketsFootball;
     }
     return null;
 };
