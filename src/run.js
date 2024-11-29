@@ -59,12 +59,15 @@ app.get('/ticket_detail', (req, res) => {
     '/bus',
     '/football',
     '/plane',
-    '/train',
-    '/planned%20trips'
+    '/train'
 ].forEach(route => {
     app.get(route, (req, res) => {
         res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'filter', 'filter.html'));
     });
+});
+
+app.get('/contactUs', (req, res) => {
+    res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'contactUs', 'contactUs.html'));
 });
 
 // Start server

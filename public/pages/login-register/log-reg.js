@@ -1,13 +1,12 @@
 const cardSwitch = document.getElementById('reg-log');
 
-cardSwitch.checked = window.location.href.includes('/register');
+// cardSwitch.checked = window.location.href.includes('/register');
 
-cardSwitch.addEventListener('change', () => {
-    setTimeout(() => {
-        window.location.href = cardSwitch.checked ? '/register' : '/login';
-    }, 500);
-});
-
+// cardSwitch.addEventListener('change', () => {
+//     setTimeout(() => {
+//         window.location.href = cardSwitch.checked ? '/register' : '/login';
+//     }, 500);
+// });
 
 // Login Script
 const loginForm = document.getElementById('loginForm');

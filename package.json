@@ -5,8 +5,12 @@
   "scripts": {
     "start": "node src/run.js"
   },
-  "keywords": ["ticketing", "express", "nodejs"],  
-  "author": "Teckety", 
+  "keywords": [
+    "ticketing",
+    "express",
+    "nodejs"
+  ],
+  "author": "Teckety",
   "license": "ISC",
   "description": "A ticketing system project using Express and MongoDB",
   "dependencies": {
@@ -19,6 +23,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.10.0",
     "mongoose": "^8.7.2",
-    "path": "^0.12.7"
+    "nodemailer": "^6.9.16",
+    "path": "^0.12.7",
+    "validator": "^13.12.0"
   }
 }
