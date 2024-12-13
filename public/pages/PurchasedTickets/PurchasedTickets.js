@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Check if user is logged in
     if (!userId) {
+        console.log('User not logged in. Redirecting to login...');
         alert('User not logged in. Redirecting to login...');
         window.location.href = '/login';
         return;
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to fetch and render purchased tickets based on selected category
     const fetchPurchasedTickets = (category = 'all') => {
+        console.log(`Fetching purchased tickets for category: ${category}`);
         fetch(`/users/${userId}/PurchasedTickets`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -32,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!data.tickets || data.tickets.length === 0) {
                 ticketsContainer.innerHTML = '<p>No tickets purchased yet.</p>';
+                console.log('No tickets purchased yet.');
                 return;
             }
 
@@ -65,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Fetch ticket details for each group
             const ticketDetailsPromises = Object.values(groupedTickets).map(groupedTicket => {
                 const category = groupedTicket.category;
+                console.log(`Fetching details for ticket ID: ${groupedTicket.ticketId}, Category: ${category}`);
                 return fetch(`/tickets/${category}/${groupedTicket.ticketId}`)
                     .then(res => res.json())
                     .then(ticketData => {
@@ -90,34 +94,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
             Promise.all(ticketDetailsPromises)
                 .then(tickets => {
+                    console.log('Tickets with details:', tickets);
                     tickets.forEach(ticket => {
                         console.log('Rendering Ticket:', ticket);
 
                         const ticketDiv = document.createElement('div');
                         ticketDiv.classList.add('ticket');
+                        ticketDiv.setAttribute('data-ticket-id', ticket.ticketId);
                         ticketDiv.innerHTML = `
-                            <a href="/ticket_detail?category=${ticket.category}&ticket=${ticket.ticketId}" style="text-decoration: none;">
-                                <div class="ticket-wrap">
-                                    <div class="Purchasedticket-image">
-                                        <img src="${ticket.img}" alt="Ticket Image" />
-                                    </div>
-                                    <div class="ticket-details">
-                                        <h3 class="ticket-title">${ticket.name}</h3>
-                                        <div class="ticket-info">
-                                            <p><i class="fas fa-calendar-alt"></i> <span class="info-title">Date:</span> ${new Date(ticket.date).toLocaleString()}</p>
-                                            <p><i class="fas fa-tags"></i> <span class="info-title">Type:</span> ${ticket.selectedType}</p>
-                                            ${ticket.category === 'cinema' ? ` 
-                                                <p><i class="fas fa-chair"></i> <span class="info-title">Seats:</span> ${ticket.seatNumbers.join(', ')}</p>
-                                            ` : ''}
-                                            <p><i class="fas fa-cogs"></i> <span class="info-title">Quantity:</span> ${ticket.quantity}</p>
-                                            <p><i class="fas fa-certificate"></i> <span class="info-title">Category:</span> ${(ticket.category).charAt(0).toUpperCase() + (ticket.category).slice(1)}</p>
-                                            <p><i class="fas fa-dollar-sign"></i> <span class="info-title">Price:</span> <span class="ticket-price-box">EGP ${ticket.price}</span></p>
-                                        </div>
+                            <div class="ticket-wrap">
+                                <div class="Purchasedticket-image">
+                                    <img src="${ticket.img}" alt="Ticket Image" />
+                                </div>
+                                <div class="ticket-details">
+                                    <h3 class="ticket-title">${ticket.name}</h3>
+                                    <div class="ticket-info">
+                                        <p><i class="fas fa-calendar-alt"></i> <span class="info-title">Date:</span> ${new Date(ticket.date).toLocaleString()}</p>
+                                        <p><i class="fas fa-tags"></i> <span class="info-title">Type:</span> ${ticket.selectedType}</p>
+                                        ${ticket.category === 'cinema' ? ` 
+                                            <p><i class="fas fa-chair"></i> <span class="info-title">Seats:</span> ${ticket.seatNumbers.join(', ')}</p>
+                                        ` : '' }
+                                        <p><i class="fas fa-cogs"></i> <span class="info-title">Quantity:</span> ${ticket.quantity}</p>
+                                        <p><i class="fas fa-certificate"></i> <span class="info-title">Category:</span> ${(ticket.category).charAt(0).toUpperCase() + (ticket.category).slice(1)}</p>
+                                        <p><i class="fas fa-dollar-sign"></i> <span class="info-title">Price:</span> <span class="ticket-price-box">EGP ${ticket.price}</span></p>
+                                        <!-- Cancel Button -->
+                                        <button class="cancel-button" data-ticket-id="${ticket.ticketId}" data-category="${ticket.category}" data-selected-type="${ticket.selectedType}" data-seat-numbers="${ticket.seatNumbers.join(', ')}">
+                                            Cancel Booking
+                                        </button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
                         `;
-
                         ticketsContainer.appendChild(ticketDiv);
                     });
                 })
@@ -149,6 +156,8 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedOption.textContent = e.target.textContent;
             const selectedCategory = e.target.textContent.toLowerCase(); // Get selected category text
 
+            console.log(`Category selected: ${selectedCategory}`);
+
             // Fetch tickets with the selected category
             fetchPurchasedTickets(selectedCategory);
 
@@ -165,4 +174,124 @@ document.addEventListener('DOMContentLoaded', () => {
             optionsContainer.classList.remove('open');  // Close dropdown if click is outside
         }
     });
+
+// Handle Cancel Button Click
+document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('cancel-button')) {
+        e.preventDefault(); // Prevent any unwanted link navigation
+        const ticketId = e.target.getAttribute('data-ticket-id');
+        const category = e.target.getAttribute('data-category');
+        const selectedType = e.target.getAttribute('data-selected-type');
+        const seatNumbers = e.target.getAttribute('data-seat-numbers').split(', ');
+
+        console.log(`Cancel button clicked for ticketId: ${ticketId}, category: ${category}, selectedType: ${selectedType}, seatNumbers: ${seatNumbers}`);
+
+        // Open the cancel modal
+        openCancelModal(ticketId, category, selectedType, seatNumbers);
+    }
+});
+
+const openCancelModal = (ticketId, category, selectedType, seatNumbers) => {
+    const modal = document.createElement('div');
+    modal.id = 'cancel-modal';
+    modal.classList.add('modal');
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Cancel Ticket</h2>
+            <p><strong>Ticket ID:</strong> ${ticketId}</p>
+            <p><strong>Category:</strong> ${category.charAt(0).toUpperCase() + category.slice(1)}</p>
+            <p><strong>Type:</strong> ${selectedType}</p>
+
+            ${category === 'cinema' ? ` 
+                <p><strong>Seats to cancel:</strong> ${seatNumbers.join(', ')}</p>
+                <label for="seatsToCancel">Enter seat numbers to cancel (comma-separated):</label>
+                <input type="text" id="seatsToCancel" placeholder="e.g., A1, A2">
+            ` : ` 
+                <label for="quantityToCancel">Enter the quantity of tickets to cancel:</label>
+                <input type="number" id="quantityToCancel" value="1" min="1" max="${seatNumbers.length}">
+            `}
+
+            <button id="cancel-confirm" data-ticket-id="${ticketId}" data-category="${category}">Confirm Cancel</button>
+            <button id="cancel-close">Close</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+
+    // Handle Confirm Cancel Button Click
+    document.getElementById('cancel-confirm').addEventListener('click', () => {
+        // Only process seatsToCancel if it's not empty
+        const seatsToCancel = document.getElementById('seatsToCancel') ? document.getElementById('seatsToCancel').value.split(',').map(seat => seat.trim()).filter(seat => seat !== "") : [];
+        const quantityToCancel = document.getElementById('quantityToCancel') ? parseInt(document.getElementById('quantityToCancel').value) : 1;
+
+        console.log(`Confirm cancel for ticketId: ${ticketId}, seats: ${seatsToCancel.length ? seatsToCancel : seatNumbers}, quantity: ${quantityToCancel}`);
+        
+        cancelTicket(ticketId, category, seatsToCancel.length ? seatsToCancel : seatNumbers, seatFilter= selectedType, quantityToCancel);
+    });
+
+    // Close modal
+    document.getElementById('cancel-close').addEventListener('click', () => {
+        document.body.removeChild(modal);
+    });
+};
+
+
+const cancelTicket = (ticketId, category, seatsToCancel, seatFilter, quantityToCancel) => {
+    console.log(`Canceling ticket with ID: ${ticketId}, seats: ${seatsToCancel}, quantity: ${quantityToCancel}`);
+    
+    // Ensure seatsToCancel is an empty array for non-cinema tickets
+    if (category !== 'cinema' && !seatsToCancel) {
+        seatsToCancel = [];  // Ensure empty array for non-cinema tickets
+        seatFilter = null;   // Ensure null for non-cinema tickets
+    }
+
+    fetch('/users/cancel', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            ticketId,
+            userId: localStorage.getItem('userId'),  // Correct userId
+            ticketType: category,  // Correct category
+            seatsToCancel,         // Pass empty array for non-cinema tickets
+            seatFilter,      // Pass null for non-cinema tickets
+            quantityToCancel,      // Use quantityToCancel for non-cinema tickets
+        }),
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log(`Ticket canceled successfully: ${ticketId}`);
+            alert('Ticket canceled successfully');
+            removeTicketFromUI(ticketId, seatsToCancel); // Remove the canceled ticket from the UI
+            document.body.removeChild(document.getElementById('cancel-modal')); // Close the modal
+            window.location.reload();
+        } else {
+            throw new Error('Cancelation failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error canceling ticket:', error);
+        alert('Failed to cancel ticket');
+    });
+};
+
+
+const removeTicketFromUI = (ticketId, seatsToCancel) => {
+    const ticketDiv = document.querySelector(`[data-ticket-id="${ticketId}"]`);
+    if (ticketDiv) {
+        if (seatsToCancel.length > 0) {
+            seatsToCancel.forEach(seat => {
+                console.log(`Seat ${seat} canceled`);
+                // Update UI for specific seats here, e.g., mark them as available
+                // You can implement a visual cue for this if needed
+            });
+        } else {
+            // If no specific seats were canceled, just remove the whole ticket div
+            ticketDiv.remove();
+        }
+    }
+};
+
+
+
 });
