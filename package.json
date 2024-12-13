@@ -1,12 +1,14 @@
 {
-  "name": "ticketyprojectfiles",
-  "version": "1.0.0",
-  "main": "run.js",
+  "name": "tickety",
+  "version": "10.0.0",
+  "main": "src/app.js",
   "scripts": {
-    "start": "node src/run.js"
+    "start": "node src/app.js"
   },
   "keywords": [
     "ticketing",
+    "ticket",
+    "tickety",
     "express",
     "nodejs"
   ],

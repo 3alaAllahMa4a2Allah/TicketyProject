@@ -9,6 +9,16 @@ const User = require('../models/user');
 const router = express.Router();
 require('dotenv').config();
 
+const TicketCinema = require('../models/ticketCinema');    // Cinema ticket model
+const TicketBus = require('../models/ticketBus');          // Bus ticket model
+const TicketConcert = require('../models/ticketConcert'); // Concert ticket model
+const TicketPlane = require('../models/ticketPlane');     // Plane ticket model
+const TicketTrain = require('../models/ticketTrain');     // Train ticket model
+const TicketFootball = require('../models/ticketFootball'); // Football ticket model
+
+
+
+
 // Middleware for JWT authentication
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -318,7 +328,7 @@ router.post('/send-email', (req, res) => {
 
     const mailOptions2 = {
         from: process.env.EMAIL,
-        to: "kirolosmourice814@gmail.com",
+        to: "tofa201714@gmail.com",
         subject: `New Message from ${name}`,
         text: `Message from ${name} (${email}):\n\n ${message}`,
     };
@@ -330,6 +340,138 @@ router.post('/send-email', (req, res) => {
         }
         res.status(200).json({ message: 'Email sent successfully!' });
     });
+
+    const mailOptions3 = {
+        from: process.env.EMAIL,
+        to: "kirolosmourice814@gmail.com",
+        subject: `New Message from ${name}`,
+        text: `Message from ${name} (${email}):\n\n ${message}`,
+    };
+
+    transporter.sendMail(mailOptions3, (error, info) => {
+        if (error) {
+            console.error('Error sending email:', error);
+            return res.status(500).json({ message: 'Failed to send email.' });
+        }
+        res.status(200).json({ message: 'Email sent successfully!' });
+    });
 });
+
+router.post('/cancel', async (req, res) => {
+    const { ticketId, userId, ticketType, seatsToCancel = [], seatFilter, quantityToCancel = 0 } = req.body;
+
+    console.log('Received cancel request:', { ticketId, userId, ticketType, seatsToCancel, seatFilter, quantityToCancel });
+
+    if (!ticketId || !userId || !ticketType) {
+        return res.status(400).json({ message: 'Ticket ID, User ID, and Ticket Type are required' });
+    }
+
+    try {
+        // Determine the correct ticket model based on the ticketType
+        let TicketModel;
+
+        switch (ticketType) {
+            case 'bus':
+                TicketModel = TicketBus;
+                break;
+            case 'cinema':
+                TicketModel = TicketCinema;
+                break;
+            case 'concert':
+                TicketModel = TicketConcert;
+                break;
+            case 'football':
+                TicketModel = TicketFootball;
+                break;
+            case 'plane':
+                TicketModel = TicketPlane;
+                break;
+            case 'train':
+                TicketModel = TicketTrain;
+                break;
+            default:
+                console.error('Invalid ticket type:', ticketType);
+                return res.status(400).json({ message: 'Invalid ticket type' });
+        }
+
+        // Find the ticket in the database
+        const ticket = await TicketModel.findById(ticketId);
+        if (!ticket) {
+            console.error('Ticket not found:', ticketId);
+            return res.status(404).json({ message: 'Ticket not found' });
+        }
+
+        console.log('Ticket found:', ticket);
+
+        // Handle seat cancellation for cinema tickets
+        if (ticketType === 'cinema' && seatsToCancel.length > 0) {
+            const seatArrayKey = `seats_${seatFilter}`;
+            if (!ticket[seatArrayKey]) {
+                console.error('Invalid seat filter or no seats available:', seatFilter);
+                return res.status(400).json({ message: 'Invalid seat filter or no seats available' });
+            }
+
+            // Cancel seats only in the correct array based on seatFilter
+            seatsToCancel.forEach(seat => {
+                const index = ticket[seatArrayKey].indexOf(seat);
+                if (index !== -1) {
+                    ticket[seatArrayKey].splice(index, 1); // Remove the seat
+                    ticket.amount += 1; // Restore ticket availability
+                }
+            });
+        } else if (quantityToCancel > 0) {
+            // For non-cinema tickets, adjust quantity
+            if (quantityToCancel > ticket.amount) {
+                console.error('Cancel quantity exceeds available tickets:', quantityToCancel, ticket.amount);
+                return res.status(400).json({ message: 'Cannot cancel more than the purchased amount' });
+            }
+            ticket.amount += quantityToCancel; // Adjust ticket quantity for non-cinema tickets
+        }
+
+        // Save the ticket after modifications
+        await ticket.save();
+
+        // Find the user and update their purchased tickets
+        const user = await User.findById(userId);
+        if (!user) {
+            console.error('User not found:', userId);
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        console.log('User found:', user);
+        
+        // Remove only the canceled tickets or seats from the user's purchasedTickets
+        let numberOfTicketsCanceled = quantityToCancel;
+
+        user.purchasedTickets = user.purchasedTickets.filter(userTicket => {
+            const matchByTicketId = userTicket.ticketId.toString() === ticketId;
+            if (matchByTicketId) {
+                if (seatsToCancel.length > 0 && ticketType === 'cinema') {
+                    return !seatsToCancel.includes(userTicket.seatNumber) || userTicket.selectedType !== seatFilter;
+                } else if (numberOfTicketsCanceled > 0) {
+                    if (userTicket.selectedType === seatFilter && userTicket.category === ticketType) {
+                        numberOfTicketsCanceled--;
+                        return false; // Exclude the canceled ticket
+                    }
+                }
+            }
+            return true;
+        });
+        
+
+        // Save the updated user document
+        await user.save();
+
+        console.log('Ticket(s) canceled successfully');
+        res.status(200).json({ message: 'Ticket canceled successfully' });
+    } catch (error) {
+        console.error('Error in canceling ticket:', error);
+        res.status(500).json({ message: 'Server error while canceling ticket', error: error.message });
+    }
+});
+
+
+
+
 
 module.exports = router;
