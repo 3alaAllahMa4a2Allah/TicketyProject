@@ -6,6 +6,18 @@ body {
     padding: 0;
 }
 
+/* Header */
+header.head1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color:  rgba(244, 244, 244, 0.73);
+    color: white;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 h1 {
     text-align: center;
     font-size: 2.5rem;
@@ -108,11 +120,11 @@ h1 {
 
 /* Ticket Header */
 header.Phead {
-    background: linear-gradient(135deg, #3498db, rgb(0, 172, 63));
+    background: #791c1c;
     padding: 40px 0;
     text-align: center;
     color: #fff;
-    border-bottom: 5px solid rgb(21, 190, 170);
+    border-bottom: 5px solid #006d7f;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin-top: 10%;
 }
@@ -350,5 +362,32 @@ main.PTcontainer {
 
 #cancel-close:hover {
     background-color: #c82333;
+}
+
+/* Cancel Button Style */
+.cancel-button {
+    background-color: #d9534f; /* Red background for cancel */
+    color: #fff; /* White text */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-button:hover {
+    background-color: #c9302c; /* Darker red on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+.cancel-button:active {
+    background-color: #ac2925; /* Even darker red when clicked */
+    transform: scale(0.98); /* Slight shrink effect on click */
+}
+
+.cancel-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Focus effect */
 }
 
