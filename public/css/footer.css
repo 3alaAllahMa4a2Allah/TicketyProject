@@ -1,6 +1,6 @@
 /* Footer Style */
 .footer {
-    background-color: #222;
+    background-color: #791c1c;
     color: #fff;
     padding: 20px 10px;
     font-family: Arial, sans-serif;
@@ -63,6 +63,8 @@
   }
   
   .social-links {
+  margin-top: 20px;
+    margin-left: 125px;
     display: flex;
     gap: 10px;
   }
@@ -71,22 +73,21 @@
     display: inline-block;
     width: 40px;
     height: 40px;
-    background-color: #444;
+    background-color:  #1a5d7f;
     padding: 8px;
     border-radius: 50%;
-    color: #fff;
     text-align: center;
     font-size: 1.2rem;
   }
   
   .social-icon:hover {
-    background-color: #1a5d7f;
+    background-color: #629991;
     
   }
   
   /* Footer Bottom */
   .footer-bottom {
-    background-color: #111;
+    background-color: #242424;
     text-align: center;
     padding: 8px 10px;
     margin-top: 20px;
@@ -111,7 +112,7 @@
     }
   
     .footer-section.links li {
-        width: 100%; /* عرض العناصر بنسبة 100% في الشاشات الصغيرة */
+        width: 100%; 
     }
   }
   

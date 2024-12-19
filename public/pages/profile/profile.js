@@ -1,7 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
-    const editButton = document.querySelector('.profile-edit-btn');
+    const overviewBtn = document.getElementById('overviewBtn');
+    const editProfileBtn = document.getElementById('editProfileBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const profileOverview = document.getElementById('profileOverview');
+    const profileEditForm = document.getElementById('profileEditForm');
+    const saveChangesBtn = document.getElementById('saveChangesBtn');
+
     const displayFields = {
         name: document.getElementById('userName'),
         email: document.getElementById('userEmail'),
@@ -10,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         role: document.getElementById('userRole'),
         nationalID: document.getElementById('userNationalID'),
     };
+
     const inputFields = {
         name: document.getElementById('editName'),
         email: document.getElementById('editEmail'),
@@ -26,10 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fetch user data
     fetch(`/users/${userId}`)
-        .then(response => {
-            if (!response.ok) throw new Error(`Failed to fetch user data: ${response.statusText}`);
-            return response.json();
-        })
+        .then(response => response.json())
         .then(user => {
             displayFields.name.textContent = user.username;
             displayFields.email.textContent = user.email;
@@ -50,62 +54,76 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(error);
         });
 
-    // Toggle between edit and save
-    editButton.addEventListener('click', () => {
-        const isEditing = editButton.textContent === 'Edit Profile';
+    // Toggle between Overview and Edit Profile sections
+    overviewBtn.addEventListener('click', () => {
+        profileOverview.style.display = 'block';
+        profileEditForm.style.display = 'none';
+        
+        // Set active menu item
+        overviewBtn.classList.add('active');
+        editProfileBtn.classList.remove('active');
+    });
 
-        if (isEditing) {
-            // Enable editing
-            Object.values(displayFields).forEach(field => (field.style.display = 'none'));
-            Object.values(inputFields).forEach(field => (field.style.display = 'block'));
-            editButton.textContent = 'Save';
-        } else {
-            // Save changes
-            const updatedUser = {
-                username: inputFields.name.value.trim(),
-                email: inputFields.email.value.trim(),
-                phone: inputFields.phone.value.trim(),
-                age: inputFields.age.value.trim(),
-                role: inputFields.role.value.trim(),
-                nationalID: inputFields.nationalID.value.trim(),
-            };
+    editProfileBtn.addEventListener('click', () => {
+        profileOverview.style.display = 'none';
+        profileEditForm.style.display = 'block';
 
-            // Validate required fields
-            if (!updatedUser.username || !updatedUser.email) {
-                alert('Name and Email are required.');
-                return;
-            }
+        // Set active menu item
+        editProfileBtn.classList.add('active');
+        overviewBtn.classList.remove('active');
+    });
 
-            fetch('/users/updateProfile', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify(updatedUser),
-            })
-                .then(response => {
-                    if (!response.ok) throw new Error(`Update failed: ${response.statusText}`);
-                    return response.json();
-                })
-                .then(() => {
-                    // Update UI
-                    displayFields.name.textContent = updatedUser.username;
-                    displayFields.email.textContent = updatedUser.email;
-                    displayFields.phone.textContent = updatedUser.phone || 'User Phone';
-                    displayFields.age.textContent = updatedUser.age || 'User Age';
-                    displayFields.role.textContent = updatedUser.role || 'User Role';
-                    displayFields.nationalID.textContent = updatedUser.nationalID || 'User National ID';
+    // Save changes in profile edit form
+    saveChangesBtn.addEventListener('click', () => {
+        const updatedUser = {
+            username: inputFields.name.value.trim(),
+            email: inputFields.email.value.trim(),
+            phone: inputFields.phone.value.trim(),
+            age: inputFields.age.value.trim(),
+            role: inputFields.role.value.trim(),
+            nationalID: inputFields.nationalID.value.trim(),
+        };
 
-                    Object.values(displayFields).forEach(field => (field.style.display = 'block'));
-                    Object.values(inputFields).forEach(field => (field.style.display = 'none'));
-
-                    editButton.textContent = 'Edit Profile';
-                })
-                .catch(error => {
-                    alert('Error updating profile. Please try again.');
-                    console.error(error);
-                });
+        if (!updatedUser.username || !updatedUser.email) {
+            alert('Name and Email are required.');
+            return;
         }
+
+        fetch('/users/updateProfile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(updatedUser),
+        })
+            .then(response => response.json())
+            .then(() => {
+                // Update UI
+                displayFields.name.textContent = updatedUser.username;
+                displayFields.email.textContent = updatedUser.email;
+                displayFields.phone.textContent = updatedUser.phone || 'User Phone';
+                displayFields.age.textContent = updatedUser.age || 'User Age';
+                displayFields.role.textContent = updatedUser.role || 'User Role';
+                displayFields.nationalID.textContent = updatedUser.nationalID || 'User National ID';
+                
+                profileOverview.style.display = 'block';
+                profileEditForm.style.display = 'none';
+                
+                // Set active menu item
+                overviewBtn.classList.add('active');
+                editProfileBtn.classList.remove('active');
+            })
+            .catch(error => {
+                alert('Error updating profile. Please try again.');
+                console.error(error);
+            });
+    });
+
+    // Logout
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('userId');
+        localStorage.removeItem('token');
+        window.location.href = '/login'; // Redirect to login page
     });
 });
