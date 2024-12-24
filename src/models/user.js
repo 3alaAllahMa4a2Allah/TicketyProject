@@ -55,6 +55,10 @@ const userSchema = new mongoose.Schema(
         emailVerified: { 
             type: Boolean, 
             default: false
+        },
+        tokenExpiresAt: {
+            type: Date,
+            default: null
         }
     },
     {

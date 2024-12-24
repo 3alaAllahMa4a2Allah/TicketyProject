@@ -103,6 +103,8 @@ router.post('/register', async (req, res) => {
 
         // Save the new user to the database
         await newUser.save();
+
+        res.json({ message: 'Registration successful. Please check your email for verification.' });
     } catch (error) {
         console.error('Error during registration:', error);
         res.status(500).json({ message: 'Server error during registration' });
@@ -470,8 +472,80 @@ router.post('/cancel', async (req, res) => {
     }
 });
 
+// Send Reset Password Email
+router.post('/forgot-password', async (req, res) => {
+    try {
+        const { email } = req.body;
 
+        // Check if the email exists
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'Email not found' });
+        }
 
+        // Generate a secure verification token
+        const verificationToken = crypto.randomBytes(32).toString('hex');
+        user.verificationToken = verificationToken;
+        user.tokenExpiresAt = Date.now() + 3600000; // Token valid for 1 hour
+        await user.save();
 
+        const resetLink = `${process.env.BASE_URL}/reset-password/${verificationToken}`;
+
+        // Set up Nodemailer
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER, // Your email
+                pass: process.env.EMAIL_PASS // Your email password
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Password Reset Request',
+            text: `You requested a password reset. Click the link to reset your password: ${resetLink}\n\nIf you did not request this, please ignore this email.`
+        };
+
+        // Send email
+        await transporter.sendMail(mailOptions);
+
+        res.json({ success: true, message: 'Reset link sent to your email' });
+    } catch (error) {
+        console.error('Error in forgot-password:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+// Reset Password
+router.post('/reset-password', async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+
+        // Find the user with the token
+        const user = await User.findOne({
+            verificationToken: token,
+            tokenExpiresAt: { $gt: Date.now() } // Ensure the token is still valid
+        });
+
+        if (!user) {
+            return res.status(400).json({ success: false, message: 'Invalid or expired token' });
+        }
+
+        // Hash the new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        // Update the password and clear the token
+        user.password = hashedPassword;
+        user.verificationToken = null;
+        user.tokenExpiresAt = null;
+        await user.save();
+
+        res.json({ success: true, message: 'Password updated successfully' });
+    } catch (error) {
+        console.error('Error in reset-password:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
 
 module.exports = router;

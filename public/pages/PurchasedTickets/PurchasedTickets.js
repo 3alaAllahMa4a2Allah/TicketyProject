@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ticketDiv.classList.add('ticket');
                         ticketDiv.setAttribute('data-ticket-id', ticket.ticketId);
                         ticketDiv.innerHTML = `
+                        <a href="/ticket_detail?category=${ticket.category}&ticket=${ticket.ticketId}" style="text-decoration: none;">
                             <div class="ticket-wrap">
                                 <div class="Purchasedticket-image">
                                     <img src="${ticket.img}" alt="Ticket Image" />
@@ -124,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     </div>
                                 </div>
                             </div>
+                        </a>
                         `;
                         ticketsContainer.appendChild(ticketDiv);
                     });

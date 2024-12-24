@@ -5,19 +5,58 @@ async function fetchTicketDetails(ticketId) {
     const ticket = await response.json();
 
     const ticketDetailWrapper = document.querySelector('#ticket-detail');
-    ticketDetailWrapper.innerHTML = `
-      <div class="ticket-info">
-        <img src="${ticket.img}" alt="${ticket.name} photo">
-        <div class="ticket-details">
-          <h3>${ticket.name}</h3>
-          <p class="price">Price: EGP ${ticket.price.toFixed(2)}</p>
-          <p class="availability">${ticket.amount > 0 ? 'In Stock' : 'Out of Stock'}</p>
-          <p class="description"><strong>Description:</strong> ${ticket.description}</p>
-          <p class="location"><strong>Location:</strong> ${ticket.location}</p>
-          <p class="type"><strong>Ticket Type:</strong> ${ticket.ticketType}</p>
+    let ticketContent = '';
+
+if (category === 'cinema') {
+  ticketContent = `
+    <div class="cinema-category">
+      <div class="movie-item">
+        <div class="movie-image-container">
+          <img src="${ticket.img}" alt="${ticket.name}" class="movie-image" />
+          <div class="play-pause-btn" onclick="toggleVideo('movieTrailer1')">
+            <img src="../../images/play-icon.png" alt="Play" id="playBtn1" />
+          </div>
+        </div>
+        <div class="movie-trailer" id="movieTrailer1">
+          <!-- Embedded YouTube Trailer -->
+          <iframe 
+            src="${ticket.video}" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
-    `;
+    </div>`;
+} else {
+  ticketContent = `<img src="${ticket.img}" alt="${ticket.name} photo">`;
+}
+
+ticketDetailWrapper.innerHTML = `
+  <div class="ticket-info">
+    ${ticketContent}
+    <div class="ticket-details">
+      <h3 class="ticket-name">${ticket.name}</h3>
+      <p class="price">Price: EGP ${ticket.price.toFixed(2)}</p>
+      <p class="availability">${ticket.amount > 0 ? 'In Stock' : 'Out of Stock'}</p>
+      <p class="description"><strong>Description:</strong> ${ticket.description}</p>
+      ${
+        ['plane', 'bus', 'train'].includes(category)
+          ? `
+            <p class="location"><strong>Start Location:</strong> ${ticket.startLocation || 'Not specified'}</p>
+            <p class="location"><strong>Destination:</strong> ${ticket.destination || 'Not specified'}</p>
+          `
+          : `
+            <p class="location"><strong>Location:</strong> ${ticket.location || 'Not specified'}</p>
+          `
+      }
+      <p class="type"><strong>Ticket Type:</strong> ${ticket.ticketType}</p>
+    </div>
+  </div>`;
+
+
+
   } catch (error) {
     console.error('Error fetching ticket details:', error);
     ticketDetailWrapper.innerHTML = '<p>Error loading ticket details. Please try again later.</p>';
@@ -335,6 +374,36 @@ async function ticketTransport(ticketId, userId, category) {
     }
   });
 }
+
+// Function to toggle play/pause and show trailer
+function toggleVideo(trailerId) {
+  var movieItem = document.getElementById(trailerId).closest('.movie-item');
+  var iframe = movieItem.querySelector('iframe');
+  var playButton = movieItem.querySelector('.play-pause-btn img');
+
+  // Toggle active state
+  movieItem.classList.toggle('active');
+
+  // Check if the movie trailer is active
+  if (movieItem.classList.contains('active')) {
+      // Play video
+      var player = new YT.Player(iframe, {
+          events: {
+              'onReady': function(event) {
+                  event.target.playVideo();
+              }
+          }
+      });
+      playButton.src = "pause-icon.png"; // Change to Pause icon
+  } else {
+      // Pause video
+      var player = new YT.Player(iframe);
+      player.pauseVideo();
+      playButton.src = "play-icon.png"; // Change to Play icon
+  }
+}
+
+
 
 window.onload = async () => {
   try {

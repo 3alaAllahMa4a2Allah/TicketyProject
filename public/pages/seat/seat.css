@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -15,7 +16,7 @@ section {
   justify-content: center;
   font-family: "Lato", sans-serif;
   margin: 0;
-  border-radius:20px;
+  border-radius: 20px;
 }
 
 .movie-container {
@@ -47,14 +48,16 @@ section {
   font-size: 50px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover and selection */
 }
 
 .seat.selected {
-  background-color: green;
+  background-color: #4caf50; /* Green for selected seats */
+  transform: scale(1.1); /* Slightly increase size when selected */
 }
 
 .seat.sold {
-  background-color: #fff;
+  background-color: #000; /* Black for reserved (sold) seats */
 }
 
 .seat:nth-of-type(2) {
@@ -68,6 +71,7 @@ section {
 .seat:not(.sold):hover {
   cursor: pointer;
   transform: scale(1.2);
+  background-color: #8bc34a; /* Light green on hover */
 }
 
 .showcase .seat:not(.sold):hover {
@@ -91,6 +95,7 @@ section {
   justify-content: center;
   margin: 0 10px;
 }
+
 .showcase li small {
   margin-left: 2px;
 }
@@ -108,12 +113,12 @@ section {
   box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
 }
 
-p.text{
-    margin: 5px 0;
+p.text {
+  margin: 5px 0;
 }
 
-p.text span{
-    color: rgb(158, 248, 158);
+p.text span {
+  color: rgb(158, 248, 158);
 }
 
 section button {
@@ -236,4 +241,88 @@ section button {
   margin-top: 20px; /* Ensure space between button and note */
 }
 
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scrolling if the content is larger than the screen */
+  background-color: rgba(0, 0, 0, 0.6); /* Darker overlay for modern feel */
+  padding-top: 60px;
+  transition: all 0.3s ease-in-out; /* Smooth transition for modal opening */
+}
 
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 800px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 12px; /* Smooth rounded corners */
+  transition: all 0.3s ease-in-out; /* Smooth transition for content */
+}
+
+.close-btn {
+  color: #aaa;
+  font-size: 30px;
+  font-weight: bold;
+  float: right;
+  transition: all 0.3s ease; /* Smooth transition for hover */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content h1 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.modal-content #booking-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.modal-content #cinemaSeats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.modal-content .seat {
+  background-color: #444451;
+  height: 35px;
+  width: 40px;
+  margin: 5px;
+  font-size: 18px;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out; /* Smooth transition for hover and selection */
+}
+
+.modal-content .seat:hover {
+  cursor: pointer;
+  transform: scale(1.1); /* Slightly increase size on hover */
+  background-color: #8bc34a; /* Light green on hover */
+}
+
+.modal-content .seat.selected {
+  background-color: #4caf50; /* Green for selected seats */
+}
+
+.modal-content .seat.sold {
+  background-color: #000; /* Black for reserved (sold) seats */
+}
