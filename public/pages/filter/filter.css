@@ -7,11 +7,8 @@
 
 body {
     height: 100%;
-    display: flex;
-    margin: 0;
-    background-color: #f9f9f9;
-    font-size: 14px;
-    color: #333;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 
@@ -19,7 +16,6 @@ body {
     display: flex;
     margin: 30px;
     flex: 1;
-    padding-left: 380px; /* Adjusted for wider sidebar */
 }
 
 .breadcrumb {
@@ -121,58 +117,56 @@ select {
 
 /* Adjust the category title to start at the same position as the tickets */
 #namePage_2 {
-    font-size: 20px; /* Smaller font size */
+    font-size:27px; /* Smaller font size */
     font-weight: bold;
     color: #333;
-   
-    margin-top: 30px; 
-    margin-bottom: 20px; 
+    margin: 5px 0 50px 0px; 
     text-align: left; 
 }
 
 
 /* Ticket container adjustments */
 .ticket-container {
-    width: 1020px;
-    padding: 20px;
+    width: 100%;
+ padding-left: 80px;
     text-decoration: none;
+   
 }
 
 .tickets-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 35px;
     justify-content: flex-start;   
     text-decoration: none; 
+   
 }
 
 /* Default for most categories: 3 tickets per row */
 .ticket {
     position: relative;
     background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    width: calc(33.33% - 20px); /* 3 tickets per row */
+    width: calc(28% - 6.5%); /* 3 tickets per row */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s;
     height: auto; /* Allow height to adjust based on content */
     display: flex;
-    flex-direction: column; /* Stack the image, title, and description vertically */
+    flex-direction: row; /* Stack the image, title, and description vertically */
     justify-content: space-between;
     text-decoration: none;
-    
+    border-bottom-right-radius:0px ;
+    border-bottom-left-radius: 0px;
 }
 
 /* Special handling for bus, train, and plane categories (1 ticket per row) */
-.ticket.bus, .ticket.train, .ticket.plane {
-    width: calc(50% - 20px); /* 2 tickets per row */
+.ticket.bus, .ticket.train, .ticket.plane ,.ticket.concert {
+    width: calc(30% - 5%); /* 2 tickets per row */
     text-decoration: none;
 }
 
-.ticket.bus img, .ticket.train img, .ticket.plane img {
+.ticket.bus img, .ticket.train img, .ticket.plane img ,.ticket.concert img img {
     width: 100%; /* 1 ticket per row */
-    height: 180px;
+    height: 200px;
     object-fit: fill; /* Ensure the image is contained within its bounds */
     text-decoration: none;
 }
@@ -180,13 +174,12 @@ select {
 .ticket:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     text-decoration: none;
+    transform: translateY(-10px) scale(1.01);
 }
 
 .ticket img {
     width: 100%; /* Ensure the image takes up the full width of the container */
-    height: auto; /* Allow the height to adjust based on the aspect ratio */
-    object-fit: contain; /* Ensure the image fits within the container without being cropped */
-    border-radius: 8px;
+    height: 300px; /* Allow the height to adjust based on the aspect ratio */
 }
 
 .ticket .ticket-content {
@@ -212,6 +205,7 @@ select {
 }
 
 .ticket a {
+    width: 100%;
     text-decoration: none;
     color: #007bff;
     text-decoration: none;
@@ -234,7 +228,6 @@ select {
 }
 
 .body-filter {
-    position: absolute;
     top: 130px;
 /* Filter Sidebar */
 }
@@ -242,12 +235,8 @@ select {
 
 
 .filter-sidebar {
-    overflow-y: auto;
-    position: fixed;
-    top: 200px;
-    bottom: 30px;
-    left: 30px;
-    width: 350px; 
+    width: 30%; 
+    height: 100%;
     padding: 25px; 
     background-color: #aa7e7e25;
     z-index: 10;

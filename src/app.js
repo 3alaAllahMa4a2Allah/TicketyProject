@@ -53,6 +53,14 @@ app.get('/ticket_detail', (req, res) => {
     });
 });
 
+app.get('/forgot-password', (req, res) => {
+    res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'forgot-password', 'forgot-password.html'));
+});
+
+app.get('/reset-password/:token', (req, res) => {
+    res.sendFile(path.join(__dirname, '../', 'public', 'pages', 'forgot-password', 'reset-password.html'));
+});
+
 [
     '/concert',
     '/cinema',

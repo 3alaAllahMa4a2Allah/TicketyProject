@@ -281,3 +281,19 @@ h6 span{
 	width: auto;
 	display: block;
 }
+
+/* Forgot Password Style */
+.forgot-password {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color:#ffeba7;
+  text-decoration: none;
+  transition: all 200ms linear;
+}
+
+.forgot-password:hover {
+  color: #ffeba7;
+  text-decoration: underline;
+}

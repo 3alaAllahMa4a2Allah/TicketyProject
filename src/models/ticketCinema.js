@@ -6,6 +6,7 @@ const ticketSchema = new mongoose.Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     img: { type: String, required: true },
+    video: { type: String, required: true },
     amount: { type: Number, required: true, default: 0 },
     location: { type: String, required: true },
     seats_stander: { type: Array, required: true },

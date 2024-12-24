@@ -4,6 +4,7 @@
     color: #fff;
     padding: 20px 10px;
     font-family: Arial, sans-serif;
+    text-align: center;
 }
 
 .footer-container {
@@ -64,9 +65,9 @@
   
   .social-links {
   margin-top: 20px;
-    margin-left: 125px;
     display: flex;
     gap: 10px;
+    justify-content: center;
   }
   
   .social-icon {

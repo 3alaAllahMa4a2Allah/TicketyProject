@@ -26,13 +26,16 @@ noUiSlider.create(priceSlider, {
 priceSlider.noUiSlider.on('update', function (values) {
     const minValue = Math.round(values[0]);
     const maxValue = Math.round(values[1]);
-    minPriceValue.textContent = `EGP ${minValue}`;
-    maxPriceValue.textContent = `EGP ${maxValue}`;
-    minPriceInput.value = minValue;
-    maxPriceInput.value = maxValue;
+    
+    minPriceValue.textContent = `EGP ${minValue}`;  // Display min value
+    maxPriceValue.textContent = `EGP ${maxValue}`;  // Display max value
+    
+    minPriceInput.value = minValue;  // Update min input field
+    maxPriceInput.value = maxValue;  // Update max input field
 
-    filterTickets(minValue, maxValue);
+    filterTickets(minValue, maxValue);  // Apply filter based on updated range
 });
+
 
 function updateSliderFromInput() {
     let minValue = parseFloat(minPriceInput.value);
@@ -41,12 +44,41 @@ function updateSliderFromInput() {
     maxValue = isNaN(maxValue) ? 500 : Math.min(maxValue, 500);
 
     if (minValue >= maxValue) {
-        minValue = maxValue - 1;
+        minValue = maxValue - 1;  // Ensure minValue is always less than maxValue
     }
 
-    priceSlider.noUiSlider.set([minValue, maxValue]);
-    filterTickets(minValue, maxValue);
+    priceSlider.noUiSlider.set([minValue, maxValue]);  // Set slider values
+    filterTickets(minValue, maxValue);  // Filter tickets based on new range
 }
+
+// Event listener for minPriceInput
+minPriceInput.addEventListener('input', () => {
+    const minPrice = parseFloat(minPriceInput.value) || 0;
+    const maxPrice = parseFloat(maxPriceInput.value) || 500;
+
+    if (minPrice > maxPrice) {
+        maxPriceInput.value = minPrice; // Ensure maxPrice is never lower than minPrice
+    }
+
+    priceSlider.noUiSlider.set([minPrice, maxPrice]);
+
+    filterTickets(minPrice, maxPrice);
+});
+
+// Event listener for maxPriceInput
+maxPriceInput.addEventListener('input', () => {
+    const minPrice = parseFloat(minPriceInput.value) || 0;
+    const maxPrice = parseFloat(maxPriceInput.value) || 500;
+
+    if (minPrice > maxPrice) {
+        minPriceInput.value = maxPrice; // Ensure minPrice is never higher than maxPrice
+    }
+
+    priceSlider.noUiSlider.set([minPrice, maxPrice]);
+
+    filterTickets(minPrice, maxPrice);
+});
+
 
 // Adjust ticket filters dynamically
 // Fetch tickets and apply filters
@@ -124,8 +156,6 @@ function filterTickets(minPrice, maxPrice) {
     ticketsWrapper.innerHTML = '';
 
     const category = window.location.pathname.split('/').pop();
-    const inStockChecked = document.getElementById('inStockCheckbox').checked;
-    const outOfStockChecked = document.getElementById('outOfStockCheckbox').checked;
 
     let selectedLocation = '';
     let selectedStartLocation = '';
@@ -145,8 +175,6 @@ function filterTickets(minPrice, maxPrice) {
     // Filter tickets based on price, location, ticket type, and date range
     const filteredTickets = allTickets.filter(ticket => {
         const isInPriceRange = ticket.price >= minPrice && ticket.price <= maxPrice;
-        const isInStock = ticket.amount > 0;
-        const isOutOfStock = ticket.amount === 0;
 
         let isLocationMatch = true;
         if (['bus', 'train', 'plane'].includes(category)) {
@@ -168,7 +196,6 @@ function filterTickets(minPrice, maxPrice) {
         }
 
         return isInPriceRange &&
-            ((inStockChecked && isInStock) || (outOfStockChecked && isOutOfStock) || (!inStockChecked && !outOfStockChecked)) &&
             isLocationMatch &&
             isDateMatch;
     });
@@ -235,8 +262,6 @@ document.querySelector('.clear-button').addEventListener('click', () => {
     priceSlider.noUiSlider.set([0, 500]);
     minPriceValue.textContent = 'EGP 0';
     maxPriceValue.textContent = 'EGP 500';
-    document.getElementById('inStockCheckbox').checked = false;
-    document.getElementById('outOfStockCheckbox').checked = false;
     locationDropdown.selectedIndex = 0;
     startLocationDropdown.selectedIndex = 0;
     destinationDropdown.selectedIndex = 0;
